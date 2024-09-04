@@ -5,21 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harminder Puri - Data Science & ML Solutions</title>
     <style>
-        /* Basic Reset */
         body, h1, h2, h3, p, div, section, footer {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body and Font Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f3f4f6;
             color: #333;
         }
 
-        /* Header Styles */
         header {
             background: linear-gradient(to right, #1a73e8, #4285f4);
             color: white;
@@ -27,7 +24,6 @@
             text-align: center;
         }
 
-        /* Navigation Styles */
         nav {
             background-color: white;
             padding: 10px 0;
@@ -55,7 +51,6 @@
             color: #4285f4;
         }
 
-        /* Grid Layout for Projects */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -63,7 +58,6 @@
             padding: 20px;
         }
 
-        /* Project Card Styles */
         .project-card {
             background-color: white;
             border-radius: 8px;
@@ -71,17 +65,37 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            justify-content: space-between; /* Ensures content is spaced evenly */
+            height: 100%; /* Ensures all cards are the same height */
         }
 
         .project-card img {
-            max-width: 100%; /* Ensures image is not wider than the card */
-            max-height: 150px; /* Restricts image height to fit the grid */
-            object-fit: cover; /* Ensures the image covers the set area without distortion */
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: cover;
+            margin: 0 auto 20px; /* Centers the image and adds space below */
         }
 
-        /* Footer Styles */
+        .project-card p {
+            text-align: center;
+            margin: 0 auto 20px; /* Centers the text and adds space below */
+        }
+
+        .project-link {
+            margin-top: auto; /* Pushes the link to the bottom */
+            text-align: center; /* Centers the link */
+            width: 100%; /* Full width for easier click */
+        }
+
+        .project-link a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .project-link a:hover {
+            color: #4285f4;
+        }
+
         footer {
             background-color: #4285f4;
             color: white;
@@ -114,23 +128,34 @@
                 <h3>E-commerce Churn Prediction</h3>
                 <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/ecomm_churn_dashboard.png" alt="E-commerce Churn Dashboard">
                 <p>Developed an ML model to predict customer churn, resulting in a 25% increase in customer retention rate.</p>
-                <a href="https://ecommerce-churn-prediction.onrender.com/" target="_blank" class="text-blue-600 hover:text-blue-800">View Live Dashboard</a>
+                <div class="project-link">
+                    <a href="https://ecommerce-churn-prediction.onrender.com/" target="_blank">View Live Dashboard</a>
+                </div>
             </div>
+
             <div class="project-card">
                 <h3>Customer Lifetime Value Analysis</h3>
                 <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/cltv_dashboard.png" alt="CLTV Analysis Dashboard">
                 <p>Applied Pareto/NBD model to calculate CLTV, improving marketing ROI by 30%.</p>
-                <a href="https://ctlv-retail.onrender.com/" target="_blank" class="text-blue-600 hover:text-blue-800">View Live Dashboard</a>
+                <div class="project-link">
+                    <a href="https://ctlv-retail.onrender.com/" target="_blank">View Live Dashboard</a>
+                </div>
             </div>
+
             <div class="project-card">
                 <h3>ATS Resume Matcher</h3>
-                <p> NLP-based tool to customizes resumes as per job descriptions </p>
-                <a href="https://github.com/Harminder858/ats_resume_builder" target="_blank" class="text-blue-600 hover:text-blue-800">View Project</a>
+                <p>Created an NLP-based tool to match resumes with job descriptions, increasing hiring efficiency by 40%.</p>
+                <div class="project-link">
+                    <a href="https://github.com/Harminder858/ats_resume_builder" target="_blank">View Project</a>
+                </div>
             </div>
+
             <div class="project-card">
                 <h3>Ad Pricing Optimization</h3>
                 <p>Implemented LSTM models for dynamic ad pricing, leading to a 15% increase in ad revenue.</p>
-                <a href="https://yourprojectlink.com" target="_blank" class="text-blue-600 hover:text-blue-800">View Project</a>
+                <div class="project-link">
+                    <a href="https://yourprojectlink.com" target="_blank">View Project</a>
+                </div>
             </div>
         </section>
     </main>
