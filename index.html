@@ -4,164 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harminder Puri - Data Science & ML Solutions</title>
-    <style>
-        body, h1, h2, h3, p, div, section, footer {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            color: #333;
-        }
-
-        header {
-            background: linear-gradient(to right, #1a73e8, #4285f4);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        nav {
-            background-color: white;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            padding: 0 20px;
-        }
-
-        nav ul li a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-
-        nav ul li a:hover {
-            color: #4285f4;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Ensures content is spaced evenly */
-            height: 100%; /* Ensures all cards are the same height */
-        }
-
-        .project-card img {
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: cover;
-            margin: 0 auto 20px; /* Centers the image and adds space below */
-        }
-
-        .project-card p {
-            text-align: center;
-            margin: 0 auto 20px; /* Centers the text and adds space below */
-        }
-
-        .project-link {
-            margin-top: auto; /* Pushes the link to the bottom */
-            text-align: center; /* Centers the link */
-            width: 100%; /* Full width for easier click */
-        }
-
-        .project-link a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-
-        .project-link a:hover {
-            color: #4285f4;
-        }
-
-        footer {
-            background-color: #4285f4;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 20px;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </head>
-<body>
-    <header>
-        <h1>Harminder Puri</h1>
-        <p>Data Science & Machine Learning Expert</p>
-        <p>Turning Data into Strategic Insights</p>
+<body class="bg-gray-100 font-sans">
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-2">Harminder Puri</h1>
+            <p class="text-2xl mb-6">Data Science & Machine Learning Expert</p>
+            <p class="text-xl mb-8">Turning Data into Strategic Insights</p>
+            <a href="#contact" class="bg-white text-blue-800 py-2 px-6 rounded-full font-bold hover:bg-blue-100 transition duration-300">Let's Collaborate</a>
+        </div>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#articles">Articles</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <ul class="flex justify-center space-x-6 py-4">
+                <li><a href="#services" class="text-blue-600 hover:text-blue-800">Services</a></li>
+                <li><a href="#projects" class="text-blue-600 hover:text-blue-800">Projects</a></li>
+                <li><a href="#expertise" class="text-blue-600 hover:text-blue-800">Expertise</a></li>
+                <li><a href="#articles" class="text-blue-600 hover:text-blue-800">Articles</a></li>
+                <li><a href="#contact" class="text-blue-600 hover:text-blue-800">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main>
-        <section id="projects" class="projects-grid">
-            <div class="project-card">
-                <h3>E-commerce Churn Prediction</h3>
-                <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/ecomm_churn_dashboard.png" alt="E-commerce Churn Dashboard">
-                <p>Developed an ML model to predict customer churn, resulting in a 25% increase in customer retention rate.</p>
-                <div class="project-link">
-                    <a href="https://ecommerce-churn-prediction.onrender.com/" target="_blank">View Live Dashboard</a>
+    <main class="container mx-auto px-4 py-12">
+        <section id="services" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Tailored Data Science Solutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Predictive Customer Insights</h3>
+                    <p class="text-gray-700">Leverage advanced ML models to forecast trends, segment customers, and drive data-informed decisions.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">AI-Powered Retention Strategies</h3>
+                    <p class="text-gray-700">Identify at-risk customers and develop targeted retention campaigns using cutting-edge ML techniques.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Intelligent Product Recommendations</h3>
+                    <p class="text-gray-700">Boost cross-selling and upselling with AI-driven product recommendation systems tailored to your business.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Dynamic Pricing Optimization</h3>
+                    <p class="text-gray-700">Maximize revenue with ML-driven pricing strategies that adapt to market conditions in real-time.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Precision Demand Forecasting</h3>
+                    <p class="text-gray-700">Align inventory with consumer needs using advanced predictive models and data-driven insights.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Smart Inventory Management</h3>
+                    <p class="text-gray-700">Optimize stock levels and product assortments with AI-powered inventory solutions.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <h3>Customer Lifetime Value Analysis</h3>
-                <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/cltv_dashboard.png" alt="CLTV Analysis Dashboard">
-                <p>Applied Pareto/NBD model to calculate CLTV, improving marketing ROI by 30%.</p>
-                <div class="project-link">
-                    <a href="https://ctlv-retail.onrender.com/" target="_blank">View Live Dashboard</a>
+        <section id="projects" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">E-commerce Churn Prediction</h3>
+                    <p class="text-gray-700 mb-4">Developed an ML model to predict customer churn, resulting in a 25% increase in customer retention rate.</p>
+                    <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/ecomm_churn_dashboard.png" alt="E-commerce Churn Dashboard" class="w-full mb-4 rounded">
+                    <a href="https://ecommerce-churn-prediction.onrender.com/" target="_blank" class="text-blue-600 hover:text-blue-800">View Live Dashboard</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Customer Lifetime Value Analysis</h3>
+                    <p class="text-gray-700 mb-4">Applied Pareto/NBD model to calculate CLTV, improving marketing ROI by 30%.</p>
+                    <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/cltv_dashboard.png" alt="CLTV Analysis Dashboard" class="w-full mb-4 rounded">
+                    <a href="https://ctlv-retail.onrender.com/" target="_blank" class="text-blue-600 hover:text-blue-800">View Live Dashboard</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">ATS Resume Matcher</h3>
+                    <p class="text-gray-700 mb-4">Created an NLP-based tool to match resumes with job descriptions, increasing hiring efficiency by 40%.</p>
+                    <a href="https://github.com/Harminder858/ats_resume_builder" class="text-blue-600 hover:text-blue-800">View Project</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Ad Pricing Optimization</h3>
+                    <p class="text-gray-700 mb-4">Implemented LSTM models for dynamic ad pricing, leading to a 15% increase in ad revenue.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800">View Project</a>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <h3>ATS Resume Matcher</h3>
-                <p>Created an NLP-based tool to match resumes with job descriptions, increasing hiring efficiency by 40%.</p>
-                <div class="project-link">
-                    <a href="https://github.com/Harminder858/ats_resume_builder" target="_blank">View Project</a>
+        <section id="expertise" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Technical Expertise</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">Machine Learning</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">Deep Learning</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">Natural Language Processing</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">Time Series Analysis</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">Python</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">SQL</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">TensorFlow</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                    <p class="font-semibold">PyTorch</p>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <h3>Ad Pricing Optimization</h3>
-                <p>Implemented LSTM models for dynamic ad pricing, leading to a 15% increase in ad revenue.</p>
-                <div class="project-link">
-                    <a href="https://yourprojectlink.com" target="_blank">View Project</a>
+        <section id="articles" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Insights & Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Understanding Customer Lifetime Value In Retail</h3>
+                    <p class="text-gray-700 mb-4">Explore the concept of CLTV and its impact on retail business strategies.</p>
+                    <a href="https://medium.com/miq-tech-and-analytics/understanding-customer-lifetime-value-in-retail-8192d3fcde78" class="text-blue-600 hover:text-blue-800">Read Article</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">Advanced Forecasting Techniques in Ad Pricing</h3>
+                    <p class="text-gray-700 mb-4">Discover how LSTM models can revolutionize digital advertising pricing strategies.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800">Read Article</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Let's Connect</h2>
+            <div class="max-w-lg mx-auto">
+                <p class="text-center mb-6">Ready to leverage data for your business growth? Let's discuss how my expertise can drive your success.</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:harminderpuri18@gmail.com" class="text-blue-600 hover:text-blue-800"><i class="fas fa-envelope fa-2x"></i></a>
+                    <a href="https://www.linkedin.com/in/harminder-singh-puri-b8061469/" class="text-blue-600 hover:text-blue-800"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="https://github.com/Harminder858" class="text-blue-600 hover:text-blue-800"><i class="fab fa-github fa-2x"></i></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Harminder Puri. All rights reserved.</p>
+    <footer class="bg-blue-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Harminder Puri. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>
