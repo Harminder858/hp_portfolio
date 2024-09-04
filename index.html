@@ -69,12 +69,16 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .project-card img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            max-width: 100%; /* Ensures image is not wider than the card */
+            max-height: 150px; /* Restricts image height to fit the grid */
+            object-fit: cover; /* Ensures the image covers the set area without distortion */
         }
 
         /* Footer Styles */
@@ -110,8 +114,9 @@
                 <h3>E-commerce Churn Prediction</h3>
                 <img src="https://raw.githubusercontent.com/Harminder858/hp_portfolio/main/ecomm_churn_dashboard.png" alt="E-commerce Churn Dashboard">
                 <p>Developed an ML model to predict customer churn, resulting in a 25% increase in customer retention rate.</p>
+                <a href="https://ecommerce-churn-prediction.onrender.com/" target="_blank" class="text-blue-600 hover:text-blue-800">View Live Dashboard</a>
             </div>
-            <!-- Repeat for other projects -->
+            <!-- Additional project cards should be added here following the same structure for other projects -->
         </section>
     </main>
 
