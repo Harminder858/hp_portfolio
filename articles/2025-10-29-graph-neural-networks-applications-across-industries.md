@@ -3,8 +3,6 @@ layout: default
 title: "Graph Neural Networks Applications Across Industries"
 ---
 
-# Graph Neural Networks Applications Across Industries
-
 *Published on October 29, 2025 • 7 min read • By Harminder Puri*
 
 ---
@@ -22,6 +20,9 @@ Key business challenges that GNNs address include:
 • Processing heterogeneous data types within unified frameworks
 • Scaling relationship analysis across millions of connected entities
 • Improving prediction accuracy in scenarios with sparse individual features
+
+![GNN Architecture Performance]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_1.png)
+*Performance comparison of different GNN architectures across industry applications*
 
 ## Technical Methodology and Approach
 
@@ -125,6 +126,9 @@ def evaluate_aml_model(model, test_data):
         'average_precision': np.mean(precision)
     }
 ```
+
+![GNN Implementation Pipeline]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_2.png)
+*End-to-end workflow for implementing GNN solutions in production environments*
 
 ## Model Evaluation and Results
 
@@ -236,7 +240,8 @@ Banks are increasingly using GNNs to enhance credit scoring by analyzing borrowe
 
 Implementation resulted in 19% improvement in default prediction accuracy compared to traditional credit scoring models.
 
-
+![Industry Application Results]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_3.png)
+*Comparative performance benchmarks across different industry deployments*
 
 ## Conclusion and Actionable Insights
 

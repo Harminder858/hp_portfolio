@@ -3,8 +3,6 @@ layout: default
 title: "Real-time Model Monitoring in Production: A Practical Guide"
 ---
 
-# Real-time Model Monitoring in Production: A Practical Guide
-
 *Published on October 29, 2025 • 8 min read • By Harminder Puri*
 
 ---
@@ -20,6 +18,9 @@ Consider an online retail company that uses a recommendation engine to personali
 • Wasted marketing spend on ineffective campaigns
 
 This degradation often occurs gradually—what's known as *model drift*—making it nearly impossible to detect without proactive monitoring systems in place. The challenge lies in building a robust infrastructure that can track model performance in real-time, detect anomalies, and trigger alerts or automated retraining protocols.
+
+![Model Performance Tracking]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_1.png)
+*Real-time model performance metrics and drift detection patterns*
 
 ## Understanding Real-time Model Monitoring
 
@@ -115,6 +116,9 @@ class ModelMonitor:
                   np.log(merged['current'] / (merged['baseline'] + 1e-10)))
         return psi
 ```
+
+![Monitoring Architecture Workflow]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_2.png)
+*End-to-end monitoring pipeline architecture*
 
 ## Model Evaluation and Performance Assessment
 
@@ -219,7 +223,8 @@ Advanced organizations employ ensemble monitoring strategies that combine multip
 • **Rule-based Systems**: Business logic-based alerts for domain-specific scenarios
 • **Expert Systems**: Integration with domain expert knowledge for contextual interpretation
 
-****
+![Model Drift Detection Metrics]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_3.png)
+*Trend analysis showing drift detection and performance correlation*
 
 ## Conclusion and Actionable Insights
 
