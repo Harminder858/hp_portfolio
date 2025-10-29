@@ -13,9 +13,9 @@ In today's data-driven business landscape, deploying machine learning models to 
 
 Consider an online retail company that uses a recommendation engine to personalize product suggestions. Initially, the model performs well with 85% click-through rate (CTR) accuracy. However, as seasonal trends shift or new products enter the market, the model's performance begins to deteriorate. Without real-time monitoring, this decline may go unnoticed for weeks, resulting in:
 
-• Reduced customer engagement and sales
-• Increased customer churn due to irrelevant recommendations
-• Wasted marketing spend on ineffective campaigns
+- Reduced customer engagement and sales
+- Increased customer churn due to irrelevant recommendations
+- Wasted marketing spend on ineffective campaigns
 
 This degradation often occurs gradually—what's known as *model drift*—making it nearly impossible to detect without proactive monitoring systems in place. The challenge lies in building a robust infrastructure that can track model performance in real-time, detect anomalies, and trigger alerts or automated retraining protocols.
 
@@ -28,11 +28,11 @@ This degradation often occurs gradually—what's known as *model drift*—making
 
 Real-time model monitoring requires a comprehensive approach that addresses multiple dimensions of model health:
 
-• **Performance tracking**: Continuous evaluation of prediction accuracy against ground truth data
-• **Data drift detection**: Identification of changes in input feature distributions
-• **Concept drift monitoring**: Detection of shifts in the underlying relationship between features and target variables
-• **Prediction distribution analysis**: Monitoring the statistical properties of model outputs
-• **Latency and throughput monitoring**: Ensuring models meet operational SLAs
+- **Performance tracking**: Continuous evaluation of prediction accuracy against ground truth data
+- **Data drift detection**: Identification of changes in input feature distributions
+- **Concept drift monitoring**: Detection of shifts in the underlying relationship between features and target variables
+- **Prediction distribution analysis**: Monitoring the statistical properties of model outputs
+- **Latency and throughput monitoring**: Ensuring models meet operational SLAs
 
 ### Mathematical Foundations
 
@@ -139,10 +139,10 @@ Effective model monitoring requires continuous evaluation across multiple dimens
 
 Advanced monitoring systems employ multiple statistical techniques to detect different types of drift:
 
-• **Kolmogorov-Smirnov Test**: Non-parametric test for comparing two samples
-• **Chi-square Test**: For categorical feature distribution comparison
-• **CUSUM Control Charts**: Sequential analysis technique for detecting small shifts
-• **EWMA Charts**: Exponentially weighted moving average for smooth trend detection
+- **Kolmogorov-Smirnov Test**: Non-parametric test for comparing two samples
+- **Chi-square Test**: For categorical feature distribution comparison
+- **CUSUM Control Charts**: Sequential analysis technique for detecting small shifts
+- **EWMA Charts**: Exponentially weighted moving average for smooth trend detection
 
 ### Real-world Case Study: Financial Risk Assessment
 
@@ -163,19 +163,19 @@ A major bank implemented real-time monitoring for their credit risk assessment m
 
 Implementing real-time model monitoring at scale presents several technical challenges that organizations must address:
 
-• **Data Pipeline Complexity**: Integrating monitoring with existing data infrastructure while maintaining low latency
-• **Storage and Compute**: Managing large volumes of prediction logs and metric calculations efficiently
-• **Scalability**: Ensuring the monitoring system can handle increasing model deployments and prediction volumes
-• **Real-time Processing**: Balancing comprehensive monitoring with operational performance requirements
+- **Data Pipeline Complexity**: Integrating monitoring with existing data infrastructure while maintaining low latency
+- **Storage and Compute**: Managing large volumes of prediction logs and metric calculations efficiently
+- **Scalability**: Ensuring the monitoring system can handle increasing model deployments and prediction volumes
+- **Real-time Processing**: Balancing comprehensive monitoring with operational performance requirements
 
 ### Common Implementation Pitfalls
 
 Organizations often encounter several common mistakes during monitoring implementation:
 
-• **Over-monitoring**: Tracking too many metrics leads to alert fatigue and operational overhead
-• **Inadequate Baselines**: Failing to establish proper historical baselines for meaningful comparison
-• **Delayed Detection**: Monitoring intervals that are too infrequent to catch critical performance drops
-• **Poor Alert Configuration**: Generic alerts that don't account for business context or seasonality
+- **Over-monitoring**: Tracking too many metrics leads to alert fatigue and operational overhead
+- **Inadequate Baselines**: Failing to establish proper historical baselines for meaningful comparison
+- **Delayed Detection**: Monitoring intervals that are too infrequent to catch critical performance drops
+- **Poor Alert Configuration**: Generic alerts that don't account for business context or seasonality
 
 ### Solutions and Best Practices
 
@@ -218,10 +218,10 @@ def should_retrain(model_monitor, performance_threshold=0.15, drift_threshold=0.
 
 Advanced organizations employ ensemble monitoring strategies that combine multiple detection methods:
 
-• **Statistical Tests**: Traditional hypothesis testing for distribution comparison
-• **Machine Learning Detectors**: Anomaly detection models trained on historical monitoring data
-• **Rule-based Systems**: Business logic-based alerts for domain-specific scenarios
-• **Expert Systems**: Integration with domain expert knowledge for contextual interpretation
+- **Statistical Tests**: Traditional hypothesis testing for distribution comparison
+- **Machine Learning Detectors**: Anomaly detection models trained on historical monitoring data
+- **Rule-based Systems**: Business logic-based alerts for domain-specific scenarios
+- **Expert Systems**: Integration with domain expert knowledge for contextual interpretation
 
 ![Model Drift Detection Metrics]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_3.png)
 *Trend analysis showing drift detection and performance correlation*
@@ -232,10 +232,10 @@ Real-time model monitoring is not just a technical necessity—it's a strategic 
 
 Key takeaways for successful implementation include:
 
-• **Start with Business Impact**: Focus monitoring efforts on models with the highest business value and risk exposure
-• **Establish Clear Thresholds**: Define performance and drift thresholds based on historical data and business requirements
-• **Integrate with MLOps**: Ensure monitoring is part of the complete model lifecycle management process
-• **Balance Automation with Human Oversight**: Use automated alerts for quick detection while maintaining human judgment for complex decisions
+- **Start with Business Impact**: Focus monitoring efforts on models with the highest business value and risk exposure
+- **Establish Clear Thresholds**: Define performance and drift thresholds based on historical data and business requirements
+- **Integrate with MLOps**: Ensure monitoring is part of the complete model lifecycle management process
+- **Balance Automation with Human Oversight**: Use automated alerts for quick detection while maintaining human judgment for complex decisions
 
 Organizations that invest in robust real-time monitoring systems see measurable improvements in model performance, reduced operational risk, and increased confidence in AI-driven decision making. The key is to start small, learn continuously, and scale systematically based on proven results.
 

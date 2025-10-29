@@ -109,9 +109,9 @@ Banks process millions of transactions daily, making manual fraud detection impo
 
 **Key Implementation Components:**
 
-• Multi-layer GCN architecture to capture transaction cascades
-• Temporal edge features representing transaction timing and amounts
-• Anomaly scoring based on node embedding deviations from normal patterns
+- Multi-layer GCN architecture to capture transaction cascades
+- Temporal edge features representing transaction timing and amounts
+- Anomaly scoring based on node embedding deviations from normal patterns
 
 ```python
 from sklearn.metrics import precision_recall_curve, auc
