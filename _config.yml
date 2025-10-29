@@ -1,0 +1,30 @@
+title: Harminder Puri - Data Science & ML Solutions
+description: Data Science and Machine Learning Expert Portfolio
+baseurl: "/hp_portfolio"
+url: "https://harminder858.github.io"
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Harminder Puri"
