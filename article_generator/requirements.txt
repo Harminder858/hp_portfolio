@@ -1,0 +1,21 @@
+# Article Generator Dependencies
+
+# LLM API
+anthropic>=0.18.1
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+
+# Markdown & HTML
+markdown>=3.4.0
+Pygments>=2.15.0
+
+# Utilities
+python-dotenv>=1.0.0
+requests>=2.31.0
