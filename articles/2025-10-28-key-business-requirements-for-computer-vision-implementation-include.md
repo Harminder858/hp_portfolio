@@ -38,7 +38,7 @@ title: Computer Vision Implementation Requirements
 # Computer Vision for Business Applications: Transforming Operations Through Visual Intelligence
 
 
-![Data Distribution Analysis](../assets/images/articles/key-business-requirements-for-computer-vision-implementation-include_data_distributions.png)
+![Data Distribution Analysis]({{ site.baseurl }}/assets/images/articles/key-business-requirements-for-computer-vision-implementation-include_data_distributions.png)
 *Comparison of different data distribution patterns*
 
 
