@@ -16,13 +16,15 @@ In today's interconnected business landscape, traditional machine learning appro
 The emergence of **Graph Neural Networks (GNNs)** addresses this gap by enabling machine learning models to process data represented as graphs—structures where nodes represent entities and edges represent relationships. This approach has revolutionized how industries approach complex relational problems, from drug discovery in pharmaceuticals to risk assessment in financial services.
 
 Key business challenges that GNNs address include:
-• Capturing complex interdependencies between entities that tabular models miss
-• Processing heterogeneous data types within unified frameworks
-• Scaling relationship analysis across millions of connected entities
-• Improving prediction accuracy in scenarios with sparse individual features
 
-![GNN Architecture Performance]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_1.png)
-*Performance comparison of different GNN architectures across industry applications*
+- Capturing complex interdependencies between entities that tabular models miss
+- Processing heterogeneous data types within unified frameworks
+- Scaling relationship analysis across millions of connected entities
+- Improving prediction accuracy in scenarios with sparse individual features
+
+![GNN Architecture Performance Comparison]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_1.png)
+
+*Comparing GraphSAGE, GCN, GAT, and R-GCN architectures across industry applications*
 
 ## Technical Methodology and Approach
 
@@ -127,8 +129,9 @@ def evaluate_aml_model(model, test_data):
     }
 ```
 
-![GNN Implementation Pipeline]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_2.png)
-*End-to-end workflow for implementing GNN solutions in production environments*
+![E-commerce and Finance GNN Implementation Timeline]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_2.png)
+
+*Step-by-step implementation timeline comparing GraphSAGE for product recommendations vs GCN for fraud detection*
 
 ## Model Evaluation and Results
 
@@ -149,9 +152,15 @@ GNN evaluation requires specialized metrics that account for both graph structur
 
 Industry implementations show consistent improvements over traditional methods:
 
-• E-commerce recommendation accuracy improved by 23% using GraphSAGE vs. collaborative filtering
-• Financial fraud detection precision increased by 31% with GCN-based approaches
-• Drug-target interaction prediction achieved 15% higher AUC compared to traditional QSAR methods
+- E-commerce recommendation accuracy improved by 23% using GraphSAGE vs. collaborative filtering
+- Financial fraud detection precision increased by 31% with GCN-based approaches
+- Drug-target interaction prediction achieved 15% higher AUC compared to traditional QSAR methods
+
+
+
+![GNN vs Traditional Methods Performance]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_3.png)
+
+*Quantified performance gains: +23% for e-commerce recommendations, +31% for fraud detection, +15% for drug discovery*
 
 
 
@@ -163,9 +172,9 @@ Deploying GNNs in production environments presents significant technical challen
 
 **Scalability Solutions:**
 
-• Graph sampling techniques (GraphSAINT, FastGCN) for efficient training
-• Model distillation to create lightweight inference models
-• Distributed computing frameworks (PyTorch Geometric, DGL) for parallel processing
+- Graph sampling techniques (GraphSAINT, FastGCN) for efficient training
+- Model distillation to create lightweight inference models
+- Distributed computing frameworks (PyTorch Geometric, DGL) for parallel processing
 
 ### Data Quality and Graph Construction
 
@@ -173,9 +182,9 @@ Real-world graph data often contains noise, missing connections, and inconsisten
 
 **Data Quality Management Approaches:**
 
-• Automated graph cleaning pipelines using statistical outlier detection
-• Edge confidence scoring to weight uncertain relationships
-• Active learning strategies to prioritize high-value labeling efforts
+- Automated graph cleaning pipelines using statistical outlier detection
+- Edge confidence scoring to weight uncertain relationships
+- Active learning strategies to prioritize high-value labeling efforts
 
 ### Implementation Code Example: Handling Sparse Graphs
 
@@ -214,9 +223,9 @@ def augment_sparse_graph(edge_index, augmentation_factor=2):
 
 A major retailer implemented GNN-based supply chain risk assessment across 15,000 suppliers and 500 distribution centers. The model incorporated:
 
-• Supplier reliability scores as node features
-• Geographic proximity and transportation links as edges
-• Historical disruption data for training labels
+- Supplier reliability scores as node features
+- Geographic proximity and transportation links as edges
+- Historical disruption data for training labels
 
 Results showed 28% improvement in disruption prediction accuracy and enabled proactive risk mitigation strategies.
 
@@ -224,9 +233,9 @@ Results showed 28% improvement in disruption prediction accuracy and enabled pro
 
 Pharmaceutical companies leverage GNNs to predict molecular interactions and accelerate drug discovery. A leading pharmaceutical firm used GAT (Graph Attention Networks) to:
 
-• Model protein-protein interactions as graph structures
-• Incorporate 3D molecular geometry data
-• Predict binding affinities with 89% accuracy
+- Model protein-protein interactions as graph structures
+- Incorporate 3D molecular geometry data
+- Predict binding affinities with 89% accuracy
 
 This approach reduced early-stage drug screening time from months to weeks.
 
@@ -234,14 +243,11 @@ This approach reduced early-stage drug screening time from months to weeks.
 
 Banks are increasingly using GNNs to enhance credit scoring by analyzing borrower networks:
 
-• Social connections and professional relationships as graph edges
-• Financial transaction patterns and payment histories as features
-• Default correlations across connected individuals
+- Social connections and professional relationships as graph edges
+- Financial transaction patterns and payment histories as features
+- Default correlations across connected individuals
 
 Implementation resulted in 19% improvement in default prediction accuracy compared to traditional credit scoring models.
-
-![Industry Application Results]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_3.png)
-*Comparative performance benchmarks across different industry deployments*
 
 ## Conclusion and Actionable Insights
 
@@ -249,10 +255,10 @@ Graph Neural Networks represent a paradigm shift in how businesses approach rela
 
 **Key Implementation Success Factors:**
 
-• Start with well-defined business problems where relationships matter
-• Invest in robust graph construction and data quality pipelines
-• Choose appropriate GNN architectures based on specific use cases
-• Plan for scalability from the initial implementation phase
+- Start with well-defined business problems where relationships matter
+- Invest in robust graph construction and data quality pipelines
+- Choose appropriate GNN architectures based on specific use cases
+- Plan for scalability from the initial implementation phase
 
 **Strategic Recommendations:**
 
