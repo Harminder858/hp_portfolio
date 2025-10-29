@@ -3,157 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Core Problem Can Be Articulated Through Several Key Requirements - Harminder's Portfolio</title>
+    <title>Building Recommendation Systems: Core Requirements - Harminder's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .article-paragraph {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            color: #374151;
+        }
+        .article-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        .article-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .header-1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1.5rem 0;
+            color: #111827;
+            border-bottom: 3px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+        .header-2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: #1F2937;
+        }
+        .header-3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: #374151;
+        }
+        .inline-code {
+            background-color: #F3F4F6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #DC2626;
+        }
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .article-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .image-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+        .toc-link {
+            color: #3B82F6;
+            text-decoration: none;
+            border-bottom: 1px dotted #3B82F6;
+        }
+        .toc-link:hover {
+            color: #1D4ED8;
+            border-bottom: 1px solid #1D4ED8;
+        }
+        .section-divider {
+            margin: 2rem 0;
+            border: none;
+            border-top: 2px solid #E5E7EB;
+        }
+        pre {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .reading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            z-index: 1000;
+            transition: width 0.25s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <nav class="bg-white shadow-md">
+    <div class="reading-indicator" id="reading-progress"></div>
+    
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
+                <a href="/hp_portfolio/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
                 <div class="space-x-6">
-                    <a href="/#services" class="text-gray-700 hover:text-blue-600">Services</a>
-                    <a href="/#projects" class="text-gray-700 hover:text-blue-600">Projects</a>
-                    <a href="/#expertise" class="text-gray-700 hover:text-blue-600">Expertise</a>
-                    <a href="/#insights" class="text-gray-700 hover:text-blue-600">Articles</a>
-                    <a href="/#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <a href="/hp_portfolio/#services" class="text-gray-700 hover:text-blue-600 transition">Services</a>
+                    <a href="/hp_portfolio/#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
+                    <a href="/hp_portfolio/#expertise" class="text-gray-700 hover:text-blue-600 transition">Expertise</a>
+                    <a href="/hp_portfolio/#insights" class="text-gray-700 hover:text-blue-600 transition">Articles</a>
+                    <a href="/hp_portfolio/#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <article class="container mx-auto px-4 py-12">
-        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-            <header class="mb-8">
-                <h1 class="text-4xl font-bold mb-4">The Core Problem Can Be Articulated Through Several Key Requirements</h1>
-                <div class="text-gray-600">
+        <div class="max-w-4xl mx-auto">
+            <!-- Article Header -->
+            <header class="bg-white p-8 rounded-lg shadow-md mb-8">
+                <h1 class="text-4xl font-bold mb-4 text-gray-900">Building Recommendation Systems: Core Requirements</h1>
+                <div class="flex items-center text-gray-600 text-sm">
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium mr-4">Data Science</span>
                     <span>October 28, 2025</span>
                     <span class="mx-2">•</span>
                     <span>6 min read</span>
+                    <span class="mx-2">•</span>
+                    <span class="text-blue-600">By Harminder Puri</span>
                 </div>
             </header>
 
-            <div class="prose prose-lg max-w-none">
-                <h2>Table of Contents</h2>
+            <!-- Article Content -->
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <div class="prose prose-lg max-w-none">
+                    <h2 id="table-of-contents" class="header-2">Table of Contents</h2>
 
-<ul><li>[Business Context and Problem Statement](#business-context-and-problem-statement)</li></ul>
-<ul><li>[Technical Methodology and Approach](#technical-methodology-and-approach)</li></ul>
-<ul><li>[# Collaborative Filtering Fundamentals](##-collaborative-filtering-fundamentals)</li></ul>
-<ul><li>[# Matrix Factorization Techniques](##-matrix-factorization-techniques)</li></ul>
-<ul><li>[# Hybrid Approach Implementation](##-hybrid-approach-implementation)</li></ul>
-<ul><li>[Implementation Details with Examples](#implementation-details-with-examples)</li></ul>
-<ul><li>[# Data Engineering Pipeline](##-data-engineering-pipeline)</li></ul>
-<ul><li>[# Matrix Factorization Implementation](##-matrix-factorization-implementation)</li></ul>
-<ul><li>[# Real-time Recommendation Generation](##-real-time-recommendation-generation)</li></ul>
-<ul><li>[Model Evaluation and Results](#model-evaluation-and-results)</li></ul>
-<ul><li>[# Quantitative Metrics Framework](##-quantitative-metrics-framework)</li></ul>
-<ul><li>[# Business Impact Measurement](##-business-impact-measurement)</li></ul>
-<ul><li>[# A/B Testing Framework](##-a/b-testing-framework)</li></ul>
-<ul><li>[Practical Challenges and Solutions](#practical-challenges-and-solutions)</li></ul>
-<ul><li>[# Cold Start Problem](##-cold-start-problem)</li></ul>
-<ul><li>[# Scalability Constraints](##-scalability-constraints)</li></ul>
-<ul><li>[# Data Quality Issues](##-data-quality-issues)</li></ul>
-<ul><li>[# Implementation Solutions](##-implementation-solutions)</li></ul>
-<ul><li>[Conclusion and Actionable Insights](#conclusion-and-actionable-insights)</li></ul>
+<ul class="article-list">
+<li><a href="#business-context-and-problem-statement" class="toc-link">Business Context and Problem Statement</a></li>
+<li><a href="#technical-methodology-and-approach" class="toc-link">Technical Methodology and Approach</a></li>
+<li><a href="##-collaborative-filtering-fundamentals" class="toc-link"># Collaborative Filtering Fundamentals</a></li>
+<li><a href="##-matrix-factorization-techniques" class="toc-link"># Matrix Factorization Techniques</a></li>
+<li><a href="##-hybrid-approach-implementation" class="toc-link"># Hybrid Approach Implementation</a></li>
+<li><a href="#implementation-details-with-examples" class="toc-link">Implementation Details with Examples</a></li>
+<li><a href="##-data-engineering-pipeline" class="toc-link"># Data Engineering Pipeline</a></li>
+<li><a href="##-matrix-factorization-implementation" class="toc-link"># Matrix Factorization Implementation</a></li>
+<li><a href="##-real-time-recommendation-generation" class="toc-link"># Real-time Recommendation Generation</a></li>
+<li><a href="#model-evaluation-and-results" class="toc-link">Model Evaluation and Results</a></li>
+<li><a href="##-quantitative-metrics-framework" class="toc-link"># Quantitative Metrics Framework</a></li>
+<li><a href="##-business-impact-measurement" class="toc-link"># Business Impact Measurement</a></li>
+<li><a href="##-a/b-testing-framework" class="toc-link"># A/B Testing Framework</a></li>
+<li><a href="#practical-challenges-and-solutions" class="toc-link">Practical Challenges and Solutions</a></li>
+<li><a href="##-cold-start-problem" class="toc-link"># Cold Start Problem</a></li>
+<li><a href="##-scalability-constraints" class="toc-link"># Scalability Constraints</a></li>
+<li><a href="##-data-quality-issues" class="toc-link"># Data Quality Issues</a></li>
+<li><a href="##-implementation-solutions" class="toc-link"># Implementation Solutions</a></li>
+<li><a href="#conclusion-and-actionable-insights" class="toc-link">Conclusion and Actionable Insights</a></li>
+</ul>
 
-<p>---</p>
+<hr class="section-divider">
 
-<h1>Recommendation Systems in E-commerce: Driving Revenue Through Personalized Customer Experiences</h1>
+<h1 id="recommendation-systems-in-e-commerce-driving-revenue-through-personalized-customer-experiences" class="header-1">Recommendation Systems in E-commerce: Driving Revenue Through Personalized Customer Experiences</h1>
 
-![User-Item Rating Matrix](/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_user_item_matrix.png)
+<div class="image-container"><img src="/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_user_item_matrix.png" alt="User-Item Rating Matrix" class="article-image"><div class="image-caption">User-Item Rating Matrix</div></div>
 <em>Visualization of user preferences across different items</em>
 
-<h2>Business Context and Problem Statement</h2>
+<h2 id="business-context-and-problem-statement" class="header-2">Business Context and Problem Statement</h2>
 
-<p>In today's hyper-competitive e-commerce landscape, retailers face the critical challenge of capturing customer attention in an environment where the average online shopper encounters over 4,000 advertisements daily. The business imperative is clear: <em>personalization drives conversion</em>. Amazon's recommendation engine generates 35% of its revenue, while Netflix attributes 80% of viewer engagement to its recommendation algorithms. For e-commerce businesses, the fundamental question becomes: how do we effectively match millions of products with millions of customers in real-time to maximize both customer satisfaction and revenue?</p>
+<p class="article-paragraph">In today's hyper-competitive e-commerce landscape, retailers face the critical challenge of capturing customer attention in an environment where the average online shopper encounters over 4,000 advertisements daily. The business imperative is clear: <em>personalization drives conversion</em>. Amazon's recommendation engine generates 35% of its revenue, while Netflix attributes 80% of viewer engagement to its recommendation algorithms. For e-commerce businesses, the fundamental question becomes: how do we effectively match millions of products with millions of customers in real-time to maximize both customer satisfaction and revenue?</p>
 
-![Data Distribution Analysis](/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_data_distributions.png)
+<div class="image-container"><img src="/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_data_distributions.png" alt="Data Distribution Analysis" class="article-image"><div class="image-caption">Data Distribution Analysis</div></div>
 <em>Comparison of different data distribution patterns</em>
 
-<p>The core problem can be articulated through several key requirements:</p>
+<p class="article-paragraph">The core problem can be articulated through several key requirements:</p>
 
-<p>• <strong>Scalability</strong>: Handle millions of users and products simultaneously
-• <strong>Real-time processing</strong>: Generate recommendations within milliseconds of user interaction
-• <strong>Cold start mitigation</strong>: Provide relevant suggestions for new users and products
-• <strong>Diversity balance</strong>: Maintain recommendation variety while ensuring relevance
-• <strong>Business alignment</strong>: Optimize for both customer satisfaction and profitability</p>
+<ul class="article-list">
+<li><strong>Scalability</strong>: Handle millions of users and products simultaneously</li>
+<li><strong>Real-time processing</strong>: Generate recommendations within milliseconds of user interaction</li>
+<li><strong>Cold start mitigation</strong>: Provide relevant suggestions for new users and products</li>
+<li><strong>Diversity balance</strong>: Maintain recommendation variety while ensuring relevance</li>
+<li><strong>Business alignment</strong>: Optimize for both customer satisfaction and profitability</li>
+</ul>
 
-<h2>Technical Methodology and Approach</h2>
+<h2 id="technical-methodology-and-approach" class="header-2">Technical Methodology and Approach</h2>
 
-<h3>Collaborative Filtering Fundamentals</h3>
+<h3 id="collaborative-filtering-fundamentals" class="header-3">Collaborative Filtering Fundamentals</h3>
 
-<p>The foundation of most e-commerce recommendation systems lies in <em>collaborative filtering</em>, which identifies patterns in user behavior to make predictions. Two primary approaches dominate the field:</p>
+<p class="article-paragraph">The foundation of most e-commerce recommendation systems lies in <em>collaborative filtering</em>, which identifies patterns in user behavior to make predictions. Two primary approaches dominate the field:</p>
 
 <strong>User-based collaborative filtering</strong> identifies similar users and recommends items liked by similar customers:
 
-<p>$$\hat{r}_{ui} = \frac{\sum_{v \in N(u)} sim(u,v) \cdot r_{vi}}{\sum_{v \in N(u)} |sim(u,v)|}$$</p>
+<p class="article-paragraph">\[\hat{r}_{ui} = \frac{\sum_{v \in N(u)} sim(u,v) \cdot r_{vi}}{\sum_{v \in N(u)} |sim(u,v)|}\]</p>
 
-<p>Where $\hat{r}_{ui}$ represents the predicted rating for user $u$ and item $i$, $N(u)$ denotes neighbors of user $u$, and $sim(u,v)$ measures similarity between users.</p>
+<p class="article-paragraph">Where \(\hat{r}_{ui}\) represents the predicted rating for user \(u\) and item \(i\), \(N(u)\) denotes neighbors of user \(u\), and \(sim(u,v)\) measures similarity between users.</p>
 
 <strong>Item-based collaborative filtering</strong> recommends items similar to those previously purchased:
 
-<p>$$sim(i,j) = \frac{\sum_{u \in U_{ij}} (r_{ui} - \bar{r_u})(r_{uj} - \bar{r_u})}{\sqrt{\sum_{u \in U_{ij}} (r_{ui} - \bar{r_u})^2} \sqrt{\sum_{u \in U_{ij}} (r_{uj} - \bar{r_u})^2}}$$</p>
+<p class="article-paragraph">\[sim(i,j) = \frac{\sum_{u \in U_{ij}} (r_{ui} - \bar{r_u})(r_{uj} - \bar{r_u})}{\sqrt{\sum_{u \in U_{ij}} (r_{ui} - \bar{r_u})^2} \sqrt{\sum_{u \in U_{ij}} (r_{uj} - \bar{r_u})^2}}\]</p>
 
-<h3>Matrix Factorization Techniques</h3>
+<h3 id="matrix-factorization-techniques" class="header-3">Matrix Factorization Techniques</h3>
 
-<p>Modern implementations leverage <em>matrix factorization</em> to decompose user-item interaction matrices into latent factors. Singular Value Decomposition (SVD) factorizes the rating matrix $R$ into three components:</p>
+<p class="article-paragraph">Modern implementations leverage <em>matrix factorization</em> to decompose user-item interaction matrices into latent factors. Singular Value Decomposition (SVD) factorizes the rating matrix \(R\) into three components:</p>
 
-<p>$$R_{m \times n} \approx P_{m \times k} \times S_{k \times k} \times Q^T_{k \times n}$$</p>
+<p class="article-paragraph">\[R_{m \times n} \approx P_{m \times k} \times S_{k \times k} \times Q^T_{k \times n}\]</p>
 
-<p>Where $k$ represents the number of latent factors, typically ranging from 50-500 depending on data complexity.</p>
+<p class="article-paragraph">Where \(k\) represents the number of latent factors, typically ranging from 50-500 depending on data complexity.</p>
 
-<h3>Hybrid Approach Implementation</h3>
+<h3 id="hybrid-approach-implementation" class="header-3">Hybrid Approach Implementation</h3>
 
-<p>Industry best practices favor <em>hybrid systems</em> that combine multiple techniques. Table 1 illustrates the performance comparison across different methodologies:</p>
+<p class="article-paragraph">Industry best practices favor <em>hybrid systems</em> that combine multiple techniques. Table 1 illustrates the performance comparison across different methodologies:</p>
 
 <strong>Table 1: Recommendation Algorithm Performance Comparison</strong>
 
-<p>| Algorithm | Precision@10 | Recall@10 | Coverage (%) | Latency (ms) |
-|-----------|--------------|-----------|--------------|--------------|
-| User-based CF | 0.12 | 0.08 | 75 | 150 |
-| Item-based CF | 0.18 | 0.12 | 68 | 45 |
-| Matrix Factorization | 0.24 | 0.16 | 82 | 35 |
-| Hybrid (Weighted) | 0.28 | 0.21 | 78 | 42 |</p>
+<p class="article-paragraph">| Algorithm | Precision@10 | Recall@10 | Coverage (%) | Latency (ms) |</p>
+
+<p class="article-paragraph">|-----------|--------------|-----------|--------------|--------------|</p>
+
+<p class="article-paragraph">| User-based CF | 0.12 | 0.08 | 75 | 150 |</p>
+
+<p class="article-paragraph">| Item-based CF | 0.18 | 0.12 | 68 | 45 |</p>
+
+<p class="article-paragraph">| Matrix Factorization | 0.24 | 0.16 | 82 | 35 |</p>
+
+<p class="article-paragraph">| Hybrid (Weighted) | 0.28 | 0.21 | 78 | 42 |</p>
 
 <em>Sample data from a major retail platform with 2M users and 500K products</em>
 
-<h2>Implementation Details with Examples</h2>
+<h2 id="implementation-details-with-examples" class="header-2">Implementation Details with Examples</h2>
 
-<h3>Data Engineering Pipeline</h3>
+<h3 id="data-engineering-pipeline" class="header-3">Data Engineering Pipeline</h3>
 
-<p>The implementation begins with constructing a comprehensive user-item interaction matrix. Consider the following example from a fashion e-commerce platform:</p>
+<p class="article-paragraph">The implementation begins with constructing a comprehensive user-item interaction matrix. Consider the following example from a fashion e-commerce platform:</p>
 
-<pre><code class="python">import pandas as pd
+<pre><code class="language-python">import pandas as pd
 import numpy as np
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity
 
-<h1>Sample interaction data</h1>
+<h1 id="sample-interaction-data" class="header-1">Sample interaction data</h1>
 interactions = pd.DataFrame({
     'user_id': [1001, 1001, 1002, 1002, 1003, 1003, 1004, 1004],
     'product_id': [2001, 2003, 2001, 2002, 2002, 2004, 2003, 2004],
     'rating': [5, 4, 5, 3, 4, 5, 4, 3]
 })
 
-<h1>Create user-item matrix</h1>
+<h1 id="create-user-item-matrix" class="header-1">Create user-item matrix</h1>
 user_item_matrix = interactions.pivot_table(
     index='user_id', 
     columns='product_id', 
     values='rating'
 ).fillna(0)</code></pre>
 
-<h3>Matrix Factorization Implementation</h3>
+<h3 id="matrix-factorization-implementation" class="header-3">Matrix Factorization Implementation</h3>
 
-<p>The core recommendation engine utilizes SVD for dimensionality reduction and pattern discovery:</p>
+<p class="article-paragraph">The core recommendation engine utilizes SVD for dimensionality reduction and pattern discovery:</p>
 
-<pre><code class="python"><h1>Apply SVD for matrix factorization</h1>
+<pre><code class="language-python"><h1 id="apply-svd-for-matrix-factorization" class="header-1">Apply SVD for matrix factorization</h1>
 svd = TruncatedSVD(n_components=50, random_state=42)
 user_factors = svd.fit_transform(user_item_matrix)
 item_factors = svd.components_
 
-<h1>Calculate predicted ratings</h1>
+<h1 id="calculate-predicted-ratings" class="header-1">Calculate predicted ratings</h1>
 predicted_ratings = np.dot(user_factors, item_factors)
 predicted_df = pd.DataFrame(
     predicted_ratings, 
@@ -161,118 +283,152 @@ predicted_df = pd.DataFrame(
     columns=user_item_matrix.columns
 )</code></pre>
 
-<h3>Real-time Recommendation Generation</h3>
+<h3 id="real-time-recommendation-generation" class="header-3">Real-time Recommendation Generation</h3>
 
-<p>For production environments, recommendations must be generated in real-time based on user sessions. The process involves three key steps:</p>
+<p class="article-paragraph">For production environments, recommendations must be generated in real-time based on user sessions. The process involves three key steps:</p>
 
-<p>1. <strong>User embedding calculation</strong>: Compute user preferences in latent space
-2. <strong>Similarity scoring</strong>: Calculate similarity between user preferences and item features
-3. <strong>Ranking and filtering</strong>: Apply business rules and diversity constraints</p>
+<p class="article-paragraph">1. <strong>User embedding calculation</strong>: Compute user preferences in latent space</p>
+
+<p class="article-paragraph">2. <strong>Similarity scoring</strong>: Calculate similarity between user preferences and item features</p>
+
+<p class="article-paragraph">3. <strong>Ranking and filtering</strong>: Apply business rules and diversity constraints</p>
 
 <strong>Table 2: Feature Engineering for E-commerce Recommendations</strong>
 
-<p>| Feature Category | Examples | Weight | Business Impact |
-|------------------|----------|--------|-----------------|
-| Behavioral | Page views, add-to-cart, purchases | 0.40 | Direct engagement signal |
-| Demographic | Age, gender, location | 0.15 | Market segmentation |
-| Temporal | Seasonality, time-of-day patterns | 0.20 | Contextual relevance |
-| Content-based | Product categories, brands, prices | 0.25 | Item similarity matching |</p>
+<p class="article-paragraph">| Feature Category | Examples | Weight | Business Impact |</p>
+
+<p class="article-paragraph">|------------------|----------|--------|-----------------|</p>
+
+<p class="article-paragraph">| Behavioral | Page views, add-to-cart, purchases | 0.40 | Direct engagement signal |</p>
+
+<p class="article-paragraph">| Demographic | Age, gender, location | 0.15 | Market segmentation |</p>
+
+<p class="article-paragraph">| Temporal | Seasonality, time-of-day patterns | 0.20 | Contextual relevance |</p>
+
+<p class="article-paragraph">| Content-based | Product categories, brands, prices | 0.25 | Item similarity matching |</p>
 
 <em>Feature weights from A/B testing results across 500K users</em>
 
-<h2>Model Evaluation and Results</h2>
+<h2 id="model-evaluation-and-results" class="header-2">Model Evaluation and Results</h2>
 
-<h3>Quantitative Metrics Framework</h3>
+<h3 id="quantitative-metrics-framework" class="header-3">Quantitative Metrics Framework</h3>
 
-<p>Effective recommendation system evaluation requires a multi-dimensional approach that balances accuracy, coverage, and business impact:</p>
+<p class="article-paragraph">Effective recommendation system evaluation requires a multi-dimensional approach that balances accuracy, coverage, and business impact:</p>
 
 <strong>Primary Metrics:</strong>
-<ul><li><strong>Precision@K</strong>: Proportion of relevant items in top-K recommendations</li></ul>
-<ul><li><strong>Recall@K</strong>: Proportion of relevant items captured in top-K recommendations</li></ul>
-<ul><li><strong>Mean Average Precision (MAP)</strong>: Average precision across all users</li></ul>
-<ul><li><strong>Normalized Discounted Cumulative Gain (NDCG)</strong>: Ranking quality measure</li></ul>
+<ul class="article-list">
+<li><strong>Precision@K</strong>: Proportion of relevant items in top-K recommendations</li>
+<li><strong>Recall@K</strong>: Proportion of relevant items captured in top-K recommendations</li>
+<li><strong>Mean Average Precision (MAP)</strong>: Average precision across all users</li>
+<li><strong>Normalized Discounted Cumulative Gain (NDCG)</strong>: Ranking quality measure</li>
+</ul>
 
 <strong>Secondary Metrics:</strong>
-<ul><li><strong>Coverage</strong>: Percentage of catalog items recommended</li></ul>
-<ul><li><strong>Diversity</strong>: Variation in recommended item categories</li></ul>
-<ul><li><strong>Novelty</strong>: Proportion of non-obvious recommendations</li></ul>
+<ul class="article-list">
+<li><strong>Coverage</strong>: Percentage of catalog items recommended</li>
+<li><strong>Diversity</strong>: Variation in recommended item categories</li>
+<li><strong>Novelty</strong>: Proportion of non-obvious recommendations</li>
+</ul>
 
-<h3>Business Impact Measurement</h3>
+<h3 id="business-impact-measurement" class="header-3">Business Impact Measurement</h3>
 
-<p>Beyond algorithmic performance, the true measure of success lies in business outcomes. Key performance indicators include:</p>
+<p class="article-paragraph">Beyond algorithmic performance, the true measure of success lies in business outcomes. Key performance indicators include:</p>
 
-<p>• <strong>Conversion Rate Lift</strong>: Percentage improvement in purchase rates
-• <strong>Average Order Value (AOV) Increase</strong>: Revenue per transaction growth
-• <strong>Customer Lifetime Value (CLV) Enhancement</strong>: Long-term customer value improvement
-• <strong>Engagement Metrics</strong>: Time-on-site and return visit frequency</p>
+<ul class="article-list">
+<li><strong>Conversion Rate Lift</strong>: Percentage improvement in purchase rates</li>
+<li><strong>Average Order Value (AOV) Increase</strong>: Revenue per transaction growth</li>
+<li><strong>Customer Lifetime Value (CLV) Enhancement</strong>: Long-term customer value improvement</li>
+<li><strong>Engagement Metrics</strong>: Time-on-site and return visit frequency</li>
+</ul>
 
-<p>A major electronics retailer implementing these methodologies observed:</p>
+<p class="article-paragraph">A major electronics retailer implementing these methodologies observed:</p>
 
 <strong>Table 3: Business Impact Results After System Implementation</strong>
 
-<p>| Metric | Baseline | Post-Implementation | Improvement |
-|--------|----------|-------------------|-------------|
-| Conversion Rate | 2.1% | 3.4% | +62% |
-| Average Order Value | $87 | $112 | +29% |
-| Customer Retention (30-day) | 64% | 78% | +22% |
-| Revenue per User (monthly) | $12.40 | $18.90 | +52% |</p>
+<p class="article-paragraph">| Metric | Baseline | Post-Implementation | Improvement |</p>
+
+<p class="article-paragraph">|--------|----------|-------------------|-------------|</p>
+
+<p class="article-paragraph">| Conversion Rate | 2.1% | 3.4% | +62% |</p>
+
+<p class="article-paragraph">| Average Order Value | \(87 | \)112 | +29% |</p>
+
+<p class="article-paragraph">| Customer Retention (30-day) | 64% | 78% | +22% |</p>
+
+<p class="article-paragraph">| Revenue per User (monthly) | \(12.40 | \)18.90 | +52% |</p>
 
 <em>Results aggregated over 6-month period with 2M active users</em>
 
-<h3>A/B Testing Framework</h3>
+<h3 id="a/b-testing-framework" class="header-3">A/B Testing Framework</h3>
 
-<p>Rigorous testing involves controlled experiments with statistical significance:</p>
+<p class="article-paragraph">Rigorous testing involves controlled experiments with statistical significance:</p>
 
-<pre><code class="python">from scipy import stats
+<pre><code class="language-python">from scipy import stats
 
-def ab_test_significance(control_metric, test_metric, alpha=0.05):
-    """
-    Perform t-test for A/B test significance
-    """
-    t_stat, p_value = stats.ttest_ind(control_metric, test_metric)
-    is_significant = p_value < alpha
-    
-    return {
-        't_statistic': t_stat,
-        'p_value': p_value,
-        'significant': is_significant
-    }</code></pre>
+<p class="article-paragraph">def ab_test_significance(control_metric, test_metric, alpha=0.05):</p>
 
-<h2>Practical Challenges and Solutions</h2>
+<p class="article-paragraph">"""</p>
 
-<h3>Cold Start Problem</h3>
+<p class="article-paragraph">Perform t-test for A/B test significance</p>
 
-<p>The cold start challenge affects both new users (no interaction history) and new products (no ratings). Solutions include:</p>
+<p class="article-paragraph">"""</p>
 
-<p>1. <strong>Content-based fallback</strong>: Use product metadata and user demographics
-2. <strong>Popularity-based recommendations</strong>: Leverage trending items for new users
-3. <strong>Survey integration</strong>: Collect explicit preferences during onboarding
-4. <strong>Social signals</strong>: Incorporate friend networks and social media activity</p>
+<p class="article-paragraph">t_stat, p_value = stats.ttest_ind(control_metric, test_metric)</p>
 
-<h3>Scalability Constraints</h3>
+<p class="article-paragraph">is_significant = p_value < alpha</p>
 
-<p>Handling millions of users and products requires careful system architecture:</p>
+<p class="article-paragraph">return {</p>
+
+<p class="article-paragraph">'t_statistic': t_stat,</p>
+
+<p class="article-paragraph">'p_value': p_value,</p>
+
+<p class="article-paragraph">'significant': is_significant</p>
+
+<p class="article-paragraph">}</code></pre></p>
+
+<h2 id="practical-challenges-and-solutions" class="header-2">Practical Challenges and Solutions</h2>
+
+<h3 id="cold-start-problem" class="header-3">Cold Start Problem</h3>
+
+<p class="article-paragraph">The cold start challenge affects both new users (no interaction history) and new products (no ratings). Solutions include:</p>
+
+<p class="article-paragraph">1. <strong>Content-based fallback</strong>: Use product metadata and user demographics</p>
+
+<p class="article-paragraph">2. <strong>Popularity-based recommendations</strong>: Leverage trending items for new users</p>
+
+<p class="article-paragraph">3. <strong>Survey integration</strong>: Collect explicit preferences during onboarding</p>
+
+<p class="article-paragraph">4. <strong>Social signals</strong>: Incorporate friend networks and social media activity</p>
+
+<h3 id="scalability-constraints" class="header-3">Scalability Constraints</h3>
+
+<p class="article-paragraph">Handling millions of users and products requires careful system architecture:</p>
 
 <strong>Distributed Computing Approach:</strong>
-<ul><li>Apache Spark for batch processing of user-item matrices</li></ul>
-<ul><li>Redis for real-time recommendation caching</li></ul>
-<ul><li>Elasticsearch for content-based similarity searches</li></ul>
-<ul><li>Kafka for streaming user interaction data</li></ul>
+<ul class="article-list">
+<li>Apache Spark for batch processing of user-item matrices</li>
+<li>Redis for real-time recommendation caching</li>
+<li>Elasticsearch for content-based similarity searches</li>
+<li>Kafka for streaming user interaction data</li>
+</ul>
 
-<h3>Data Quality Issues</h3>
+<h3 id="data-quality-issues" class="header-3">Data Quality Issues</h3>
 
-<p>Real-world e-commerce data presents several quality challenges:</p>
+<p class="article-paragraph">Real-world e-commerce data presents several quality challenges:</p>
 
-<p>• <strong>Sparsity</strong>: User-item matrices are typically 99%+ sparse
-• <strong>Bias</strong>: Popular items receive disproportionate attention
-• <strong>Temporal drift</strong>: User preferences evolve over time
-• <strong>Noise</strong>: Incomplete or erroneous interaction data</p>
+<ul class="article-list">
+<li><strong>Sparsity</strong>: User-item matrices are typically 99%+ sparse</li>
+<li><strong>Bias</strong>: Popular items receive disproportionate attention</li>
+<li><strong>Temporal drift</strong>: User preferences evolve over time</li>
+<li><strong>Noise</strong>: Incomplete or erroneous interaction data</li>
+</ul>
 
-<h3>Implementation Solutions</h3>
+<h3 id="implementation-solutions" class="header-3">Implementation Solutions</h3>
 
-<p>Addressing these challenges requires systematic approaches:</p>
+<p class="article-paragraph">Addressing these challenges requires systematic approaches:</p>
 
-<pre><code class="python">def handle_data_sparsity(matrix, min_interactions=5):
+<pre><code class="language-python">def handle_data_sparsity(matrix, min_interactions=5):
     """
     Filter users and items with insufficient interactions
     """
@@ -286,34 +442,102 @@ def ab_test_significance(control_metric, test_metric, alpha=0.05):
     
     return matrix.loc[valid_users, valid_items]</code></pre>
 
-<h2>Conclusion and Actionable Insights</h2>
+<h2 id="conclusion-and-actionable-insights" class="header-2">Conclusion and Actionable Insights</h2>
 
-<p>Recommendation systems represent a critical lever for e-commerce success, with well-implemented solutions delivering 20-60% increases in key business metrics. The analytical framework presented combines rigorous technical methodology with practical business considerations to create robust, scalable systems.</p>
+<p class="article-paragraph">Recommendation systems represent a critical lever for e-commerce success, with well-implemented solutions delivering 20-60% increases in key business metrics. The analytical framework presented combines rigorous technical methodology with practical business considerations to create robust, scalable systems.</p>
 
 <strong>Key Implementation Guidelines:</strong>
 
-<p>• <strong>Start simple</strong>: Begin with item-based collaborative filtering before advancing to hybrid approaches
-• <strong>Measure comprehensively</strong>: Track both algorithmic accuracy and business impact metrics
-• <strong>Plan for scale</strong>: Design systems that can handle growth from thousands to millions of users
-• <strong>Iterate continuously</strong>: Regular model retraining and experimentation drive sustained performance</p>
+<ul class="article-list">
+<li><strong>Start simple</strong>: Begin with item-based collaborative filtering before advancing to hybrid approaches</li>
+<li><strong>Measure comprehensively</strong>: Track both algorithmic accuracy and business impact metrics</li>
+<li><strong>Plan for scale</strong>: Design systems that can handle growth from thousands to millions of users</li>
+<li><strong>Iterate continuously</strong>: Regular model retraining and experimentation drive sustained performance</li>
+</ul>
 
-<p>The mathematical foundations of matrix factorization, combined with careful feature engineering and robust evaluation frameworks, provide a solid foundation for building recommendation systems that drive measurable business value. Success requires balancing technical sophistication with practical implementation considerations, ensuring that algorithms translate into real-world customer engagement and revenue growth.</p>
+<p class="article-paragraph">The mathematical foundations of matrix factorization, combined with careful feature engineering and robust evaluation frameworks, provide a solid foundation for building recommendation systems that drive measurable business value. Success requires balancing technical sophistication with practical implementation considerations, ensuring that algorithms translate into real-world customer engagement and revenue growth.</p>
 
-<p>As e-commerce continues to evolve, recommendation systems will increasingly incorporate advanced techniques like deep learning, contextual bandits, and real-time personalization. However, the fundamental principles of understanding customer behavior, measuring impact, and continuously optimizing performance remain constant drivers of success in the competitive digital marketplace.</p>
+<p class="article-paragraph">As e-commerce continues to evolve, recommendation systems will increasingly incorporate advanced techniques like deep learning, contextual bandits, and real-time personalization. However, the fundamental principles of understanding customer behavior, measuring impact, and continuously optimizing performance remain constant drivers of success in the competitive digital marketplace.</p>
+                </div>
             </div>
 
-            <footer class="mt-8 pt-8 border-t border-gray-200">
-                <a href="/#insights" class="text-blue-600 hover:text-blue-800">← Back to Articles</a>
+            <!-- Article Footer -->
+            <footer class="bg-white p-8 rounded-lg shadow-md mt-8">
+                <div class="border-t border-gray-200 pt-6">
+                    <div class="flex justify-between items-center">
+                        <a href="/hp_portfolio/#insights" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Back to Articles
+                        </a>
+                        <div class="text-sm text-gray-500">
+                            Generated with AI • Enhanced for insights
+                        </div>
+                    </div>
+                </div>
             </footer>
         </div>
     </article>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Harminder's Portfolio. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Harminder Puri</h3>
+                    <p class="text-gray-300">Data Science & Machine Learning Expert</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/hp_portfolio/#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/hp_portfolio/#projects" class="hover:text-white transition">Projects</a></li>
+                        <li><a href="/hp_portfolio/#insights" class="hover:text-white transition">Articles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/harminder-singh-puri-b8061469/" class="text-gray-300 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://github.com/Harminder858" class="text-gray-300 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Harminder Puri. All rights reserved.</p>
+            </div>
         </div>
     </footer>
     
-    <script>hljs.highlightAll();</script>
+    <script>
+        // Reading progress indicator
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+        
+        // Syntax highlighting
+        hljs.highlightAll();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

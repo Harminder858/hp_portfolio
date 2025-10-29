@@ -3,304 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Do We Select Appropriate Base Learners For Ensembling - Harminder's Portfolio</title>
+    <title>Selecting Base Learners for Ensemble Methods - Harminder's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        .article-paragraph {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            color: #374151;
+        }
+        .article-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        .article-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .header-1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1.5rem 0;
+            color: #111827;
+            border-bottom: 3px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+        .header-2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: #1F2937;
+        }
+        .header-3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            color: #374151;
+        }
+        .inline-code {
+            background-color: #F3F4F6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #DC2626;
+        }
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .article-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .image-caption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+        .toc-link {
+            color: #3B82F6;
+            text-decoration: none;
+            border-bottom: 1px dotted #3B82F6;
+        }
+        .toc-link:hover {
+            color: #1D4ED8;
+            border-bottom: 1px solid #1D4ED8;
+        }
+        .section-divider {
+            margin: 2rem 0;
+            border: none;
+            border-top: 2px solid #E5E7EB;
+        }
+        pre {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .reading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            z-index: 1000;
+            transition: width 0.25s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <nav class="bg-white shadow-md">
+    <div class="reading-indicator" id="reading-progress"></div>
+    
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
+                <a href="/hp_portfolio/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
                 <div class="space-x-6">
-                    <a href="/#services" class="text-gray-700 hover:text-blue-600">Services</a>
-                    <a href="/#projects" class="text-gray-700 hover:text-blue-600">Projects</a>
-                    <a href="/#expertise" class="text-gray-700 hover:text-blue-600">Expertise</a>
-                    <a href="/#insights" class="text-gray-700 hover:text-blue-600">Articles</a>
-                    <a href="/#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <a href="/hp_portfolio/#services" class="text-gray-700 hover:text-blue-600 transition">Services</a>
+                    <a href="/hp_portfolio/#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
+                    <a href="/hp_portfolio/#expertise" class="text-gray-700 hover:text-blue-600 transition">Expertise</a>
+                    <a href="/hp_portfolio/#insights" class="text-gray-700 hover:text-blue-600 transition">Articles</a>
+                    <a href="/hp_portfolio/#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <article class="container mx-auto px-4 py-12">
-        <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-            <header class="mb-8">
-                <h1 class="text-4xl font-bold mb-4">How Do We Select Appropriate Base Learners For Ensembling</h1>
-                <div class="text-gray-600">
+        <div class="max-w-4xl mx-auto">
+            <!-- Article Header -->
+            <header class="bg-white p-8 rounded-lg shadow-md mb-8">
+                <h1 class="text-4xl font-bold mb-4 text-gray-900">Selecting Base Learners for Ensemble Methods</h1>
+                <div class="flex items-center text-gray-600 text-sm">
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium mr-4">Data Science</span>
                     <span>October 28, 2025</span>
                     <span class="mx-2">•</span>
                     <span>6 min read</span>
+                    <span class="mx-2">•</span>
+                    <span class="text-blue-600">By Harminder Puri</span>
                 </div>
             </header>
 
-            <div class="prose prose-lg max-w-none">
-                <h2>Table of Contents</h2>
+            <!-- Article Content -->
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <div class="prose prose-lg max-w-none">
+                    <h2 id="table-of-contents" class="header-2">Table of Contents</h2>
 
-<ul><li>[Introduction: The Need for Predictive Precision in Decision-Making](#introduction-the-need-for-predictive-precision-in-decision-making)</li></ul>
-<ul><li>[# Key Questions When Adopting Ensemble Methods:](##-key-questions-when-adopting-ensemble-methods)</li></ul>
-<ul><li>[1. Understanding Ensemble Learning Frameworks](#1.-understanding-ensemble-learning-frameworks)</li></ul>
-<ul><li>[# Types of Ensemble Methods](##-types-of-ensemble-methods)</li></ul>
-<ul><li>[Mathematical Formulation](#mathematical-formulation)</li></ul>
-<ul><li>[2. Business Use Cases and Model Selection Strategies](#2.-business-use-cases-and-model-selection-strategies)</li></ul>
-<ul><li>[# Use Case 1: Retail Fraud Detection](##-use-case-1-retail-fraud-detection)</li></ul>
-<ul><li>[# Use Case 2: E-Commerce Product Recommendations](##-use-case-2-e-commerce-product-recommendations)</li></ul>
-<ul><li>[3. Implementation Walkthrough with Python](#3.-implementation-walkthrough-with-python)</li></ul>
-<ul><li>[# Step 1: Data Preparation](##-step-1-data-preparation)</li></ul>
-<ul><li>[# Step 2: Base Learner Training](##-step-2-base-learner-training)</li></ul>
-<ul><li>[# Step 3: Prediction Aggregation (Simple Voting)](##-step-3-prediction-aggregation-(simple-voting))</li></ul>
-<ul><li>[# Step 4: Evaluate Ensemble Performance](##-step-4-evaluate-ensemble-performance)</li></ul>
-<ul><li>[# Table: Model Comparison Metrics](##-table-model-comparison-metrics)</li></ul>
-<ul><li>[4. Model Evaluation Approaches in Production](#4.-model-evaluation-approaches-in-production)</li></ul>
-<ul><li>[# Cross-Validation Frameworks](##-cross-validation-frameworks)</li></ul>
-<ul><li>[# Business-Aware Metrics](##-business-aware-metrics)</li></ul>
-<ul><li>[# Performance Monitoring](##-performance-monitoring)</li></ul>
-<ul><li>[Code Snippet: SHAP Analysis](#code-snippet-shap-analysis)</li></ul>
-<ul><li>[5. Practical Challenges and Mitigation Strategies](#5.-practical-challenges-and-mitigation-strategies)</li></ul>
-<ul><li>[# Challenge 1: Computation Overhead](##-challenge-1-computation-overhead)</li></ul>
-<ul><li>[# Challenge 2: Interpretability Loss](##-challenge-2-interpretability-loss)</li></ul>
-<ul><li>[# Challenge 3: Hyperparameter Tuning Complexity](##-challenge-3-hyperparameter-tuning-complexity)</li></ul>
-<ul><li>[# Table: Ensemble Deployment Checklist](##-table-ensemble-deployment-checklist)</li></ul>
-<ul><li>[6. Conclusion: Driving Value Through Intelligent Ensemble Design](#6.-conclusion-driving-value-through-intelligent-ensemble-design)</li></ul>
-<ul><li>[# Key Takeaways:](##-key-takeaways)</li></ul>
+<ul class="article-list">
+<li><a href="#introduction-the-need-for-predictive-precision-in-decision-making" class="toc-link">Introduction: The Need for Predictive Precision in Decision-Making</a></li>
+<li><a href="##-key-questions-when-adopting-ensemble-methods" class="toc-link"># Key Questions When Adopting Ensemble Methods:</a></li>
+<li><a href="#1.-understanding-ensemble-learning-frameworks" class="toc-link">1. Understanding Ensemble Learning Frameworks</a></li>
+<li><a href="##-types-of-ensemble-methods" class="toc-link"># Types of Ensemble Methods</a></li>
+<li><a href="#mathematical-formulation" class="toc-link">Mathematical Formulation</a></li>
+<li><a href="#2.-business-use-cases-and-model-selection-strategies" class="toc-link">2. Business Use Cases and Model Selection Strategies</a></li>
+<li><a href="##-use-case-1-retail-fraud-detection" class="toc-link"># Use Case 1: Retail Fraud Detection</a></li>
+<li><a href="##-use-case-2-e-commerce-product-recommendations" class="toc-link"># Use Case 2: E-Commerce Product Recommendations</a></li>
+<li><a href="#3.-implementation-walkthrough-with-python" class="toc-link">3. Implementation Walkthrough with Python</a></li>
+<li><a href="##-step-1-data-preparation" class="toc-link"># Step 1: Data Preparation</a></li>
+<li><a href="##-step-2-base-learner-training" class="toc-link"># Step 2: Base Learner Training</a></li>
+<li><a href="##-step-3-prediction-aggregation-(simple-voting" class="toc-link"># Step 3: Prediction Aggregation (Simple Voting)</a>)</li>
+<li><a href="##-step-4-evaluate-ensemble-performance" class="toc-link"># Step 4: Evaluate Ensemble Performance</a></li>
+<li><a href="##-table-model-comparison-metrics" class="toc-link"># Table: Model Comparison Metrics</a></li>
+<li><a href="#4.-model-evaluation-approaches-in-production" class="toc-link">4. Model Evaluation Approaches in Production</a></li>
+<li><a href="##-cross-validation-frameworks" class="toc-link"># Cross-Validation Frameworks</a></li>
+<li><a href="##-business-aware-metrics" class="toc-link"># Business-Aware Metrics</a></li>
+<li><a href="##-performance-monitoring" class="toc-link"># Performance Monitoring</a></li>
+<li><a href="#code-snippet-shap-analysis" class="toc-link">Code Snippet: SHAP Analysis</a></li>
+<li><a href="#5.-practical-challenges-and-mitigation-strategies" class="toc-link">5. Practical Challenges and Mitigation Strategies</a></li>
+<li><a href="##-challenge-1-computation-overhead" class="toc-link"># Challenge 1: Computation Overhead</a></li>
+<li><a href="##-challenge-2-interpretability-loss" class="toc-link"># Challenge 2: Interpretability Loss</a></li>
+<li><a href="##-challenge-3-hyperparameter-tuning-complexity" class="toc-link"># Challenge 3: Hyperparameter Tuning Complexity</a></li>
+<li><a href="##-table-ensemble-deployment-checklist" class="toc-link"># Table: Ensemble Deployment Checklist</a></li>
+<li><a href="#6.-conclusion-driving-value-through-intelligent-ensemble-design" class="toc-link">6. Conclusion: Driving Value Through Intelligent Ensemble Design</a></li>
+<li><a href="##-key-takeaways" class="toc-link"># Key Takeaways:</a></li>
+</ul>
 
-<p>---</p>
+<hr class="section-divider">
 
-<h1>Ensemble Methods in Machine Learning: A Business-Centric Approach</h1>
+<h1 id="ensemble-methods-in-machine-learning-a-business-centric-approach" class="header-1">Ensemble Methods in Machine Learning: A Business-Centric Approach</h1>
 
-![Model Performance Comparison](/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_model_performance.png)
+<div class="image-container"><img src="/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_model_performance.png" alt="Model Performance Comparison" class="article-image"><div class="image-caption">Model Performance Comparison</div></div>
 <em>Comparison of different machine learning models across key performance metrics</em>
 
-<h2>Introduction: The Need for Predictive Precision in Decision-Making</h2>
+<h2 id="introduction-the-need-for-predictive-precision-in-decision-making" class="header-2">Introduction: The Need for Predictive Precision in Decision-Making</h2>
 
-<p>In today's data-driven enterprise landscape, the margin between strategic success and missed opportunities often hinges on the accuracy of predictive models. Consider a large e-commerce platform aiming to forecast customer churn or optimize product recommendations. A single model, despite its sophistication, may underperform due to variance, bias, or overfitting—challenges that can significantly impact revenue and customer experience.</p>
+<p class="article-paragraph">In today's data-driven enterprise landscape, the margin between strategic success and missed opportunities often hinges on the accuracy of predictive models. Consider a large e-commerce platform aiming to forecast customer churn or optimize product recommendations. A single model, despite its sophistication, may underperform due to variance, bias, or overfitting—challenges that can significantly impact revenue and customer experience.</p>
 
-![Learning Curves](/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_learning_curves.png)
+<div class="image-container"><img src="/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_learning_curves.png" alt="Learning Curves" class="article-image"><div class="image-caption">Learning Curves</div></div>
 <em>Training and validation performance curves showing model learning progression</em>
 
-<p>Ensemble methods address these limitations by combining predictions from multiple models to achieve superior performance. These techniques leverage the principle that diverse models can collectively outperform individual learners through error reduction and improved generalization.</p>
+<p class="article-paragraph">Ensemble methods address these limitations by combining predictions from multiple models to achieve superior performance. These techniques leverage the principle that diverse models can collectively outperform individual learners through error reduction and improved generalization.</p>
 
-<h3>Key Questions When Adopting Ensemble Methods:</h3>
-<ul><li>How do we select appropriate base learners for ensembling?</li></ul>
+<h3 id="key-questions-when-adopting-ensemble-methods" class="header-3">Key Questions When Adopting Ensemble Methods:</h3>
+<ul class="article-list">
+<li>How do we select appropriate base learners for ensembling?</li>
+</ul>
 
-![Data Distribution Analysis](/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_data_distributions.png)
+<div class="image-container"><img src="/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_data_distributions.png" alt="Data Distribution Analysis" class="article-image"><div class="image-caption">Data Distribution Analysis</div></div>
 <em>Comparison of different data distribution patterns</em>
 
-<ul><li>What are the trade-offs between bagging, boosting, and stacking approaches?</li></ul>
-<ul><li>How can ensemble accuracy be measured and validated in business contexts?</li></ul>
-<ul><li>What implementation challenges exist in deploying ensembles at scale?</li></ul>
+<ul class="article-list">
+<li>What are the trade-offs between bagging, boosting, and stacking approaches?</li>
+<li>How can ensemble accuracy be measured and validated in business contexts?</li>
+<li>What implementation challenges exist in deploying ensembles at scale?</li>
+</ul>
 
-<p>This article provides a comprehensive guide to understanding and applying ensemble methods in machine learning, grounded in real-world business applications and technical best practices.</p>
+<p class="article-paragraph">This article provides a comprehensive guide to understanding and applying ensemble methods in machine learning, grounded in real-world business applications and technical best practices.</p>
 
-<p>---</p>
+<hr class="section-divider">
 
-<h2>1. Understanding Ensemble Learning Frameworks</h2>
+<h2 id="1.-understanding-ensemble-learning-frameworks" class="header-2">1. Understanding Ensemble Learning Frameworks</h2>
 
-<p>Ensemble learning refers to the methodology of training multiple models (referred to as <em>base learners</em>) and aggregating their outputs to produce a stronger predictor. The core assumption is that a group of weak learners can form a strong learner when combined effectively.</p>
+<p class="article-paragraph">Ensemble learning refers to the methodology of training multiple models (referred to as <em>base learners</em>) and aggregating their outputs to produce a stronger predictor. The core assumption is that a group of weak learners can form a strong learner when combined effectively.</p>
 
-<h3>Types of Ensemble Methods</h3>
+<h3 id="types-of-ensemble-methods" class="header-3">Types of Ensemble Methods</h3>
 
-<p>| Ensemble Type | Description | Example Algorithms |
-|---------------|-------------|---------------------|
-| Bagging       | Bootstrap aggregating to reduce variance | Random Forest, Bagged Trees |
-| Boosting      | Sequential training to correct errors | AdaBoost, Gradient Boosting, XGBoost |
-| Stacking      | Meta-learning with heterogeneous models | Super Learner, Blending |</p>
+<p class="article-paragraph">| Ensemble Type | Description | Example Algorithms |</p>
 
-<p>#### Mathematical Formulation</p>
+<p class="article-paragraph">|---------------|-------------|---------------------|</p>
 
-<p>Let $ f_1(x), f_2(x), ..., f_M(x) $ be M base learners. The ensemble prediction $ F(x) $ is typically defined as:</p>
+<p class="article-paragraph">| Bagging       | Bootstrap aggregating to reduce variance | Random Forest, Bagged Trees |</p>
 
-<p>$$
-F(x) = \sum_{m=1}^{M} w_m f_m(x)
-$$</p>
+<p class="article-paragraph">| Boosting      | Sequential training to correct errors | AdaBoost, Gradient Boosting, XGBoost |</p>
 
-<p>Where $ w_m $ represents the weight assigned to each model during aggregation.</p>
+<p class="article-paragraph">| Stacking      | Meta-learning with heterogeneous models | Super Learner, Blending |</p>
 
-<p>In practice, weights may be uniform (for bagging) or learned via optimization (as in stacking). This formulation allows ensembles to adaptively balance model contributions based on performance.</p>
+<h4 id="mathematical-formulation" class="header-4">Mathematical Formulation</h4>
 
-<p>---</p>
+<p class="article-paragraph">Let \( f_1(x), f_2(x), ..., f_M(x) \) be M base learners. The ensemble prediction \( F(x) \) is typically defined as:</p>
 
-<h2>2. Business Use Cases and Model Selection Strategies</h2>
+<p class="article-paragraph">\[</p>
 
-<p>Effective deployment of ensemble methods requires alignment with business objectives. Below are real-world use cases illustrating how different ensemble strategies provide value.</p>
+<p class="article-paragraph">F(x) = \sum_{m=1}^{M} w_m f_m(x)</p>
 
-<h3>Use Case 1: Retail Fraud Detection</h3>
+<p class="article-paragraph">\]</p>
 
-<p>A financial services firm aims to detect fraudulent transactions in real time. High recall (catching most frauds) is prioritized, but false positives must also be minimized to avoid customer dissatisfaction.</p>
+<p class="article-paragraph">Where \( w_m \) represents the weight assigned to each model during aggregation.</p>
+
+<p class="article-paragraph">In practice, weights may be uniform (for bagging) or learned via optimization (as in stacking). This formulation allows ensembles to adaptively balance model contributions based on performance.</p>
+
+<hr class="section-divider">
+
+<h2 id="2.-business-use-cases-and-model-selection-strategies" class="header-2">2. Business Use Cases and Model Selection Strategies</h2>
+
+<p class="article-paragraph">Effective deployment of ensemble methods requires alignment with business objectives. Below are real-world use cases illustrating how different ensemble strategies provide value.</p>
+
+<h3 id="use-case-1-retail-fraud-detection" class="header-3">Use Case 1: Retail Fraud Detection</h3>
+
+<p class="article-paragraph">A financial services firm aims to detect fraudulent transactions in real time. High recall (catching most frauds) is prioritized, but false positives must also be minimized to avoid customer dissatisfaction.</p>
 
 <strong>Approach:</strong>
-<ul><li>Use a <strong>gradient boosting classifier</strong> (e.g., XGBoost) due to its ability to handle imbalanced classes and capture complex patterns.</li></ul>
-<ul><li>Incorporate cost-sensitive learning within the loss function to reflect business impact of misclassifications.</li></ul>
+<ul class="article-list">
+<li>Use a <strong>gradient boosting classifier</strong> (e.g., XGBoost) due to its ability to handle imbalanced classes and capture complex patterns.</li>
+<li>Incorporate cost-sensitive learning within the loss function to reflect business impact of misclassifications.</li>
+</ul>
 
-<h3>Use Case 2: E-Commerce Product Recommendations</h3>
+<h3 id="use-case-2-e-commerce-product-recommendations" class="header-3">Use Case 2: E-Commerce Product Recommendations</h3>
 
-<p>An online marketplace seeks to improve click-through rates by personalizing item suggestions. Speed and personalization accuracy are both critical.</p>
+<p class="article-paragraph">An online marketplace seeks to improve click-through rates by personalizing item suggestions. Speed and personalization accuracy are both critical.</p>
 
 <strong>Approach:</strong>
-<ul><li>Combine <strong>Random Forest</strong> with deep learning embeddings using <strong>stacking</strong>.</li></ul>
-<ul><li>Employ a meta-model (e.g., logistic regression) to blend collaborative filtering scores with tree-based features.</li></ul>
+<ul class="article-list">
+<li>Combine <strong>Random Forest</strong> with deep learning embeddings using <strong>stacking</strong>.</li>
+<li>Employ a meta-model (e.g., logistic regression) to blend collaborative filtering scores with tree-based features.</li>
+</ul>
 
-<p>| Use Case | Ensemble Method | Reason |
-|----------|-----------------|--------|
-| Fraud Detection | Boosting | Focus on recall; handles skewed data |
-| Product Recommendations | Stacking | Combines diverse models for personalization |
-| Inventory Forecasting | Bagging | Reduces variance in demand predictions |</p>
+<p class="article-paragraph">| Use Case | Ensemble Method | Reason |</p>
 
-<p>---</p>
+<p class="article-paragraph">|----------|-----------------|--------|</p>
 
-<h2>3. Implementation Walkthrough with Python</h2>
+<p class="article-paragraph">| Fraud Detection | Boosting | Focus on recall; handles skewed data |</p>
 
-<p>Implementing ensemble methods involves careful handling of data preprocessing, model training, and validation pipelines. Here’s a step-by-step example tailored for churn prediction in telecommunications.</p>
+<p class="article-paragraph">| Product Recommendations | Stacking | Combines diverse models for personalization |</p>
 
-<h3>Step 1: Data Preparation</h3>
+<p class="article-paragraph">| Inventory Forecasting | Bagging | Reduces variance in demand predictions |</p>
 
-<pre><code class="python">import pandas as pd
+<hr class="section-divider">
+
+<h2 id="3.-implementation-walkthrough-with-python" class="header-2">3. Implementation Walkthrough with Python</h2>
+
+<p class="article-paragraph">Implementing ensemble methods involves careful handling of data preprocessing, model training, and validation pipelines. Here’s a step-by-step example tailored for churn prediction in telecommunications.</p>
+
+<h3 id="step-1-data-preparation" class="header-3">Step 1: Data Preparation</h3>
+
+<pre><code class="language-python">import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
-<h1>Load dataset</h1>
+<h1 id="load-dataset" class="header-1">Load dataset</h1>
 data = pd.read_csv("churn_data.csv")
 X = data.drop(columns=['churn'])
 y = data['churn']
 
-<h1>Train-test split</h1>
+<h1 id="train-test-split" class="header-1">Train-test split</h1>
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)</code></pre>
 
-<h3>Step 2: Base Learner Training</h3>
+<h3 id="step-2-base-learner-training" class="header-3">Step 2: Base Learner Training</h3>
 
-<p>We train two models: Random Forest (RF) and Gradient Boosting (GB).</p>
+<p class="article-paragraph">We train two models: Random Forest (RF) and Gradient Boosting (GB).</p>
 
-<pre><code class="python"><h1>Initialize models</h1>
+<pre><code class="language-python"><h1 id="initialize-models" class="header-1">Initialize models</h1>
 rf = RandomForestClassifier(n_estimators=100)
 gb = GradientBoostingClassifier(n_estimators=100)
 
-<h1>Fit models</h1>
+<h1 id="fit-models" class="header-1">Fit models</h1>
 rf.fit(X_train, y_train)
 gb.fit(X_train, y_train)</code></pre>
 
-<h3>Step 3: Prediction Aggregation (Simple Voting)</h3>
+<h3 id="step-3-prediction-aggregation-(simple-voting)" class="header-3">Step 3: Prediction Aggregation (Simple Voting)</h3>
 
-<pre><code class="python"><h1>Predict probabilities</h1>
+<pre><code class="language-python"><h1 id="predict-probabilities" class="header-1">Predict probabilities</h1>
 rf_prob = rf.predict_proba(X_test)[:, 1]
 gb_prob = gb.predict_proba(X_test)[:, 1]
 
-<h1>Average probabilities</h1>
+<h1 id="average-probabilities" class="header-1">Average probabilities</h1>
 ensemble_prob = (rf_prob + gb_prob) / 2
 ensemble_pred = (ensemble_prob > 0.5).astype(int)</code></pre>
 
-<h3>Step 4: Evaluate Ensemble Performance</h3>
+<h3 id="step-4-evaluate-ensemble-performance" class="header-3">Step 4: Evaluate Ensemble Performance</h3>
 
-<pre><code class="python">print(classification_report(y_test, ensemble_pred))</code></pre>
+<pre><code class="language-python">print(classification_report(y_test, ensemble_pred))</code></pre>
 
 <strong>Expected Output:</strong> Improved precision/recall metrics compared to individual models.
 
-<h3>Table: Model Comparison Metrics</h3>
+<h3 id="table-model-comparison-metrics" class="header-3">Table: Model Comparison Metrics</h3>
 
-<p>| Model | Accuracy | Precision | Recall | F1 Score |
-|-------|----------|-----------|--------|----------|
-| Random Forest | 0.87 | 0.79 | 0.76 | 0.77 |
-| Gradient Boosting | 0.89 | 0.83 | 0.78 | 0.80 |
-| Ensemble (RF + GB) | 0.91 | 0.86 | 0.81 | 0.83 |</p>
+<p class="article-paragraph">| Model | Accuracy | Precision | Recall | F1 Score |</p>
 
-<p>The ensemble achieves higher F1 score, indicating better balance between precision and recall.</p>
+<p class="article-paragraph">|-------|----------|-----------|--------|----------|</p>
 
-<p>---</p>
+<p class="article-paragraph">| Random Forest | 0.87 | 0.79 | 0.76 | 0.77 |</p>
 
-<h2>4. Model Evaluation Approaches in Production</h2>
+<p class="article-paragraph">| Gradient Boosting | 0.89 | 0.83 | 0.78 | 0.80 |</p>
 
-<p>When deploying ensembles, robust evaluation frameworks must align with business KPIs. Key considerations include:</p>
+<p class="article-paragraph">| Ensemble (RF + GB) | 0.91 | 0.86 | 0.81 | 0.83 |</p>
 
-<h3>Cross-Validation Frameworks</h3>
+<p class="article-paragraph">The ensemble achieves higher F1 score, indicating better balance between precision and recall.</p>
 
-<p>Using time-series aware cross-validation (e.g., <code>TimeSeriesSplit</code>) ensures models are evaluated under realistic temporal conditions.</p>
+<hr class="section-divider">
 
-<h3>Business-Aware Metrics</h3>
+<h2 id="4.-model-evaluation-approaches-in-production" class="header-2">4. Model Evaluation Approaches in Production</h2>
+
+<p class="article-paragraph">When deploying ensembles, robust evaluation frameworks must align with business KPIs. Key considerations include:</p>
+
+<h3 id="cross-validation-frameworks" class="header-3">Cross-Validation Frameworks</h3>
+
+<p class="article-paragraph">Using time-series aware cross-validation (e.g., <code class="inline-code">TimeSeriesSplit</code>) ensures models are evaluated under realistic temporal conditions.</p>
+
+<h3 id="business-aware-metrics" class="header-3">Business-Aware Metrics</h3>
 
 Instead of accuracy alone, evaluate using:
-<ul><li><strong>Profit curves</strong>: Measure expected revenue impact per prediction threshold.</li></ul>
-<ul><li><strong>Lift charts</strong>: Understand how much better your model performs than random selection.</li></ul>
+<ul class="article-list">
+<li><strong>Profit curves</strong>: Measure expected revenue impact per prediction threshold.</li>
+<li><strong>Lift charts</strong>: Understand how much better your model performs than random selection.</li>
+</ul>
 
-<h3>Performance Monitoring</h3>
+<h3 id="performance-monitoring" class="header-3">Performance Monitoring</h3>
 
-<p>Track model drift and feature importance over time to ensure continued relevance. Tools like SHAP can help interpret ensemble decisions.</p>
+<p class="article-paragraph">Track model drift and feature importance over time to ensure continued relevance. Tools like SHAP can help interpret ensemble decisions.</p>
 
-<p>#### Code Snippet: SHAP Analysis</p>
+<h4 id="code-snippet-shap-analysis" class="header-4">Code Snippet: SHAP Analysis</h4>
 
-<pre><code class="python">import shap
+<pre><code class="language-python">import shap
 
-<p>explainer = shap.TreeExplainer(rf)
-shap_values = explainer.shap_values(X_test)</p>
+<p class="article-paragraph">explainer = shap.TreeExplainer(rf)</p>
 
-shap.summary_plot(shap_values[1], X_test, plot_type="bar")</code></pre>
+<p class="article-paragraph">shap_values = explainer.shap_values(X_test)</p>
 
-<p>This visualization highlights which features drive churn predictions most strongly, aiding business stakeholders in understanding model behavior.</p>
+<p class="article-paragraph">shap.summary_plot(shap_values[1], X_test, plot_type="bar")</code></pre></p>
 
-<p>---</p>
+<p class="article-paragraph">This visualization highlights which features drive churn predictions most strongly, aiding business stakeholders in understanding model behavior.</p>
 
-<h2>5. Practical Challenges and Mitigation Strategies</h2>
+<hr class="section-divider">
 
-<p>While ensembles offer significant performance gains, they introduce several operational complexities.</p>
+<h2 id="5.-practical-challenges-and-mitigation-strategies" class="header-2">5. Practical Challenges and Mitigation Strategies</h2>
 
-<h3>Challenge 1: Computation Overhead</h3>
+<p class="article-paragraph">While ensembles offer significant performance gains, they introduce several operational complexities.</p>
 
-<p>Large-scale ensembles (e.g., Stacking with dozens of base learners) demand substantial memory and compute resources.</p>
+<h3 id="challenge-1-computation-overhead" class="header-3">Challenge 1: Computation Overhead</h3>
+
+<p class="article-paragraph">Large-scale ensembles (e.g., Stacking with dozens of base learners) demand substantial memory and compute resources.</p>
 
 <strong>Solution:</strong> Employ model compression techniques such as pruning or distillation. Alternatively, leverage cloud-based parallel execution frameworks (e.g., Dask, Spark).
 
-<h3>Challenge 2: Interpretability Loss</h3>
+<h3 id="challenge-2-interpretability-loss" class="header-3">Challenge 2: Interpretability Loss</h3>
 
-<p>Stacked ensembles, especially with black-box meta-learners, become difficult to explain to non-technical stakeholders.</p>
+<p class="article-paragraph">Stacked ensembles, especially with black-box meta-learners, become difficult to explain to non-technical stakeholders.</p>
 
 <strong>Solution:</strong> Use interpretable meta-models (e.g., linear regression) or deploy SHAP values across all layers of the ensemble.
 
-<h3>Challenge 3: Hyperparameter Tuning Complexity</h3>
+<h3 id="challenge-3-hyperparameter-tuning-complexity" class="header-3">Challenge 3: Hyperparameter Tuning Complexity</h3>
 
-<p>Each base learner requires tuning—not to mention hyperparameters of the ensemble itself (e.g., voting weights, blending coefficients).</p>
+<p class="article-paragraph">Each base learner requires tuning—not to mention hyperparameters of the ensemble itself (e.g., voting weights, blending coefficients).</p>
 
 <strong>Solution:</strong> Implement Bayesian optimization (e.g., Optuna, Hyperopt) to jointly optimize ensemble components.
 
-<h3>Table: Ensemble Deployment Checklist</h3>
+<h3 id="table-ensemble-deployment-checklist" class="header-3">Table: Ensemble Deployment Checklist</h3>
 
-<p>| Challenge | Mitigation Strategy | Tools/Solutions |
-|----------|---------------------|------------------|
-| High computational cost | Model compression/distillation | ONNX, TensorFlow Lite |
-| Reduced interpretability | SHAP, LIME integration | SHAP library |
-| Hyperparameter complexity | AutoML pipelines | Optuna, Hyperopt |</p>
+<p class="article-paragraph">| Challenge | Mitigation Strategy | Tools/Solutions |</p>
 
-<p>---</p>
+<p class="article-paragraph">|----------|---------------------|------------------|</p>
 
-<h2>6. Conclusion: Driving Value Through Intelligent Ensemble Design</h2>
+<p class="article-paragraph">| High computational cost | Model compression/distillation | ONNX, TensorFlow Lite |</p>
 
-<p>Ensemble methods are powerful tools that elevate predictive performance beyond what individual models can deliver. However, their successful adoption requires a strategic blend of technical rigor and business alignment.</p>
+<p class="article-paragraph">| Reduced interpretability | SHAP, LIME integration | SHAP library |</p>
 
-<h3>Key Takeaways:</h3>
-<ul><li>Choose ensemble methods based on business goals (e.g., boosting for fraud detection, bagging for forecasting).</li></ul>
-<ul><li>Leverage Python libraries like scikit-learn, XGBoost, and SHAP for rapid prototyping and deployment.</li></ul>
-<ul><li>Evaluate not just accuracy but also business impact using profit curves and lift analysis.</li></ul>
-<ul><li>Address scalability and interpretability challenges proactively through model compression and explainability frameworks.</li></ul>
+<p class="article-paragraph">| Hyperparameter complexity | AutoML pipelines | Optuna, Hyperopt |</p>
 
-<p>By integrating these principles into your machine learning workflows, you can transform raw data into actionable intelligence that drives measurable business outcomes.</p>
+<hr class="section-divider">
 
-<p>---</p>
+<h2 id="6.-conclusion-driving-value-through-intelligent-ensemble-design" class="header-2">6. Conclusion: Driving Value Through Intelligent Ensemble Design</h2>
+
+<p class="article-paragraph">Ensemble methods are powerful tools that elevate predictive performance beyond what individual models can deliver. However, their successful adoption requires a strategic blend of technical rigor and business alignment.</p>
+
+<h3 id="key-takeaways" class="header-3">Key Takeaways:</h3>
+<ul class="article-list">
+<li>Choose ensemble methods based on business goals (e.g., boosting for fraud detection, bagging for forecasting).</li>
+<li>Leverage Python libraries like scikit-learn, XGBoost, and SHAP for rapid prototyping and deployment.</li>
+<li>Evaluate not just accuracy but also business impact using profit curves and lift analysis.</li>
+<li>Address scalability and interpretability challenges proactively through model compression and explainability frameworks.</li>
+</ul>
+
+<p class="article-paragraph">By integrating these principles into your machine learning workflows, you can transform raw data into actionable intelligence that drives measurable business outcomes.</p>
+
+<hr class="section-divider">
 
 <em>This article draws on established methodologies such as those outlined in Hastie et al.'s "The Elements of Statistical Learning" and recent advances in automated machine learning (AutoML) platforms.</em>
+                </div>
             </div>
 
-            <footer class="mt-8 pt-8 border-t border-gray-200">
-                <a href="/#insights" class="text-blue-600 hover:text-blue-800">← Back to Articles</a>
+            <!-- Article Footer -->
+            <footer class="bg-white p-8 rounded-lg shadow-md mt-8">
+                <div class="border-t border-gray-200 pt-6">
+                    <div class="flex justify-between items-center">
+                        <a href="/hp_portfolio/#insights" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Back to Articles
+                        </a>
+                        <div class="text-sm text-gray-500">
+                            Generated with AI • Enhanced for insights
+                        </div>
+                    </div>
+                </div>
             </footer>
         </div>
     </article>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Harminder's Portfolio. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Harminder Puri</h3>
+                    <p class="text-gray-300">Data Science & Machine Learning Expert</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/hp_portfolio/#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="/hp_portfolio/#projects" class="hover:text-white transition">Projects</a></li>
+                        <li><a href="/hp_portfolio/#insights" class="hover:text-white transition">Articles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/harminder-singh-puri-b8061469/" class="text-gray-300 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="https://github.com/Harminder858" class="text-gray-300 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Harminder Puri. All rights reserved.</p>
+            </div>
         </div>
     </footer>
     
-    <script>hljs.highlightAll();</script>
+    <script>
+        // Reading progress indicator
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+        
+        // Syntax highlighting
+        hljs.highlightAll();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
