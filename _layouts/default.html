@@ -5,31 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - Harminder's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        /* Article typography */
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #374151;
+        }
+        .article-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            color: #111827;
+            border-bottom: 3px solid #3B82F6;
+            padding-bottom: 0.5rem;
+        }
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            color: #1F2937;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+        .article-content code {
+            background-color: #FEE2E2;
+            color: #DC2626;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        .article-content pre {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        .article-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .article-content blockquote {
+            border-left: 4px solid #3B82F6;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #6B7280;
+        }
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .article-content th, .article-content td {
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .article-content th {
+            background-color: #F3F4F6;
+            font-weight: 600;
+        }
+        .article-content a {
+            color: #3B82F6;
+            text-decoration: none;
+            border-bottom: 1px dotted #3B82F6;
+        }
+        .article-content a:hover {
+            color: #1D4ED8;
+            border-bottom: 1px solid #1D4ED8;
+        }
+        .article-content strong {
+            font-weight: 600;
+            color: #111827;
+        }
+        .article-content em {
+            font-style: italic;
+            color: #4B5563;
+        }
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            z-index: 1000;
+            transition: width 0.25s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <nav class="bg-white shadow-md">
+    <div class="reading-progress" id="reading-progress"></div>
+    
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <a href="/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
+                <a href="/hp_portfolio/" class="text-2xl font-bold text-blue-600">Harminder's Portfolio</a>
                 <div class="space-x-6">
-                    <a href="/#services" class="text-gray-700 hover:text-blue-600">Services</a>
-                    <a href="/#projects" class="text-gray-700 hover:text-blue-600">Projects</a>
-                    <a href="/#expertise" class="text-gray-700 hover:text-blue-600">Expertise</a>
-                    <a href="/blog.html" class="text-gray-700 hover:text-blue-600">Articles</a>
-                    <a href="/#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <a href="/hp_portfolio/#services" class="text-gray-700 hover:text-blue-600 transition">Services</a>
+                    <a href="/hp_portfolio/#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
+                    <a href="/hp_portfolio/#expertise" class="text-gray-700 hover:text-blue-600 transition">Expertise</a>
+                    <a href="/hp_portfolio/#insights" class="text-gray-700 hover:text-blue-600 transition">Articles</a>
+                    <a href="/hp_portfolio/#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main>
-        {{ content }}
+    <main class="container mx-auto px-4 py-8">
+        <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12">
+            <div class="article-content">
+                {{ content }}
+            </div>
+        </article>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
+    <footer class="bg-gray-800 text-white py-8 mt-12">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Harminder's Portfolio. All rights reserved.</p>
+            <p>&copy; 2025 Harminder Puri. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        // Reading progress indicator
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+        
+        // Syntax highlighting
+        hljs.highlightAll();
+        
+        // MathJax configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
 </body>
 </html>
