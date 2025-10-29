@@ -44,7 +44,7 @@ title: Selecting Base Learners for Ensemble Methods
 # Ensemble Methods in Machine Learning: A Business-Centric Approach
 
 
-![Model Performance Comparison](/hp_portfolio/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_model_performance.png)
+![Model Performance Comparison](../assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_model_performance.png)
 *Comparison of different machine learning models across key performance metrics*
 
 
@@ -53,7 +53,7 @@ title: Selecting Base Learners for Ensemble Methods
 In today's data-driven enterprise landscape, the margin between strategic success and missed opportunities often hinges on the accuracy of predictive models. Consider a large e-commerce platform aiming to forecast customer churn or optimize product recommendations. A single model, despite its sophistication, may underperform due to variance, bias, or overfitting—challenges that can significantly impact revenue and customer experience.
 
 
-![Learning Curves](/hp_portfolio/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_learning_curves.png)
+![Learning Curves](../assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_learning_curves.png)
 *Training and validation performance curves showing model learning progression*
 
 
@@ -62,7 +62,7 @@ Ensemble methods address these limitations by combining predictions from multipl
 ### Key Questions When Adopting Ensemble Methods:
 - How do we select appropriate base learners for ensembling?
 
-![Data Distribution Analysis](/hp_portfolio/assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_data_distributions.png)
+![Data Distribution Analysis](../assets/images/articles/how-do-we-select-appropriate-base-learners-for-ensembling_data_distributions.png)
 *Comparison of different data distribution patterns*
 
 

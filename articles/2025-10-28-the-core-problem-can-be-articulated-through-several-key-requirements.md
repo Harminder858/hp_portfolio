@@ -37,7 +37,7 @@ title: Building Recommendation Systems: Core Requirements
 # Recommendation Systems in E-commerce: Driving Revenue Through Personalized Customer Experiences
 
 
-![User-Item Rating Matrix](/hp_portfolio/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_user_item_matrix.png)
+![User-Item Rating Matrix](../assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_user_item_matrix.png)
 *Visualization of user preferences across different items*
 
 
@@ -46,7 +46,7 @@ title: Building Recommendation Systems: Core Requirements
 In today's hyper-competitive e-commerce landscape, retailers face the critical challenge of capturing customer attention in an environment where the average online shopper encounters over 4,000 advertisements daily. The business imperative is clear: *personalization drives conversion*. Amazon's recommendation engine generates 35% of its revenue, while Netflix attributes 80% of viewer engagement to its recommendation algorithms. For e-commerce businesses, the fundamental question becomes: how do we effectively match millions of products with millions of customers in real-time to maximize both customer satisfaction and revenue?
 
 
-![Data Distribution Analysis](/hp_portfolio/assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_data_distributions.png)
+![Data Distribution Analysis](../assets/images/articles/the-core-problem-can-be-articulated-through-several-key-requirements_data_distributions.png)
 *Comparison of different data distribution patterns*
 
 
