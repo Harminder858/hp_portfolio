@@ -7,6 +7,10 @@ url: "https://harminder858.github.io/hp_portfolio"
 markdown: kramdown
 theme: minima
 
+# Include articles directory
+include:
+  - articles
+
 # Exclude files
 exclude:
   - Gemfile
@@ -27,4 +31,9 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      author: "Harminder Puri"
+  - scope:
+      path: "articles"
+    values:
+      layout: "default"
       author: "Harminder Puri"
