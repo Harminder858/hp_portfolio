@@ -20,7 +20,7 @@ Consider an online retail company that uses a recommendation engine to personali
 This degradation often occurs gradually—what's known as *model drift*—making it nearly impossible to detect without proactive monitoring systems in place. The challenge lies in building a robust infrastructure that can track model performance in real-time, detect anomalies, and trigger alerts or automated retraining protocols.
 
 
-```mermaid
+<div class="mermaid">
 graph TB
     subgraph "Production Environment"
         A[Model Serving API]
@@ -59,7 +59,7 @@ graph TB
     style F fill:#F59E0B,stroke:#D97706,color:#fff
     style G fill:#EF4444,stroke:#DC2626,color:#fff
     style H fill:#8B5CF6,stroke:#7C3AED,color:#fff
-```
+</div>
 
 *Real-time model performance metrics and drift detection patterns*
 
@@ -159,7 +159,7 @@ class ModelMonitor:
 ```
 
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A[Incoming Data] --> B{Feature<br/>Extraction}
     B --> C[Calculate<br/>Statistics]
@@ -179,7 +179,7 @@ flowchart LR
     style D fill:#F59E0B,stroke:#D97706,color:#000
     style G fill:#EF4444,stroke:#DC2626,color:#fff
     style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
-```
+</div>
 
 *End-to-end monitoring pipeline architecture*
 
@@ -287,7 +287,7 @@ Advanced organizations employ ensemble monitoring strategies that combine multip
 - **Expert Systems**: Integration with domain expert knowledge for contextual interpretation
 
 
-```mermaid
+<div class="mermaid">
 graph TD
     subgraph "Model Performance Metrics"
         A[Accuracy Tracking]
@@ -330,7 +330,7 @@ graph TD
     style G fill:#F59E0B,stroke:#D97706,color:#000
     style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
     style M fill:#EF4444,stroke:#DC2626,color:#fff
-```
+</div>
 
 *Trend analysis showing drift detection and performance correlation*
 
