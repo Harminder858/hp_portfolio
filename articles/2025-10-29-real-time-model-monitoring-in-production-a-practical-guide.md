@@ -3,6 +3,8 @@ layout: default
 title: "Real-time Model Monitoring in Production: A Practical Guide"
 ---
 
+# Real-time Model Monitoring in Production: A Practical Guide
+
 *Published on October 29, 2025 • 8 min read • By Harminder Puri*
 
 ---

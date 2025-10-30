@@ -139,6 +139,32 @@
             padding: 0 !important;
             font-family: inherit !important;
         }
+        /* Post header styling - ensure titles are always visible */
+        .post-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid #3B82F6;
+        }
+        .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+        .post-meta {
+            color: #6B7280;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        .post-meta time {
+            color: #3B82F6;
+            font-weight: 500;
+        }
+        /* Hide duplicate H1 if title is shown in header */
+        .has-post-header .article-content > h1:first-child {
+            display: none;
+        }
         .reading-progress {
             position: fixed;
             top: 0;
@@ -169,7 +195,25 @@
     </nav>
 
     <main class="container mx-auto px-4 py-8">
-        <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12">
+        <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12{% if page.title and page.layout == 'post' %} has-post-header{% endif %}">
+            {% if page.title and page.layout == 'post' %}
+            <header class="post-header">
+                <h1 class="post-title">{{ page.title }}</h1>
+                {% if page.date %}
+                <p class="post-meta">
+                    <time datetime="{{ page.date | date_to_xmlschema }}">
+                        Published on {{ page.date | date: "%B %d, %Y" }}
+                    </time>
+                    {% if page.reading_time %}
+                    • {{ page.reading_time }} min read
+                    {% endif %}
+                    {% if page.author %}
+                    • By {{ page.author }}
+                    {% endif %}
+                </p>
+                {% endif %}
+            </header>
+            {% endif %}
             <div class="article-content">
                 {{ content }}
             </div>

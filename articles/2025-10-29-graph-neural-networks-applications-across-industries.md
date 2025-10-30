@@ -3,6 +3,8 @@ layout: default
 title: "Graph Neural Networks Applications Across Industries"
 ---
 
+# Graph Neural Networks Applications Across Industries
+
 *Published on October 29, 2025 • 7 min read • By Harminder Puri*
 
 ---
