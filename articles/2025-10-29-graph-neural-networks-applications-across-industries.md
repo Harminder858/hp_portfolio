@@ -23,7 +23,7 @@ Key business challenges that GNNs address include:
 - Improving prediction accuracy in scenarios with sparse individual features
 
 
-<div class="mermaid">
+<pre class="mermaid">
 graph LR
     subgraph "Input Layer"
         A[Node Features]
@@ -63,7 +63,7 @@ graph LR
     style E fill:#10B981,stroke:#059669,color:#fff
     style F fill:#F59E0B,stroke:#D97706,color:#000
     style G fill:#8B5CF6,stroke:#7C3AED,color:#fff
-</div>
+</pre>
 
 *GNN Architecture Performance Comparison*
 
@@ -173,7 +173,7 @@ def evaluate_aml_model(model, test_data):
 ```
 
 
-<div class="mermaid">
+<pre class="mermaid">
 flowchart TD
     A[Central Node v] --> B[Collect Messages<br/>from Neighbors]
     B --> C{Aggregation<br/>Function}
@@ -198,7 +198,7 @@ flowchart TD
     style G fill:#F59E0B,stroke:#D97706,color:#000
     style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
     style L fill:#EF4444,stroke:#DC2626,color:#fff
-</div>
+</pre>
 
 *E-commerce and Finance GNN Implementation Timeline*
 
@@ -230,7 +230,7 @@ Industry implementations show consistent improvements over traditional methods:
 
 
 
-<div class="mermaid">
+<pre class="mermaid">
 graph TB
     subgraph "E-Commerce"
         A1[User-Product<br/>Graph]
@@ -261,7 +261,7 @@ graph TB
     style B2 fill:#10B981,stroke:#059669,color:#fff
     style C2 fill:#F59E0B,stroke:#D97706,color:#000
     style D2 fill:#8B5CF6,stroke:#7C3AED,color:#fff
-</div>
+</pre>
 
 *GNN vs Traditional Methods Performance*
 
