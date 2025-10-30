@@ -9,6 +9,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         /* Article typography */
         .article-content {
@@ -171,6 +172,20 @@
         
         // Syntax highlighting
         hljs.highlightAll();
+        
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#3B82F6',
+                primaryTextColor: '#1F2937',
+                primaryBorderColor: '#2563EB',
+                lineColor: '#6B7280',
+                secondaryColor: '#EFF6FF',
+                tertiaryColor: '#DBEAFE'
+            }
+        });
         
         // MathJax configuration
         window.MathJax = {

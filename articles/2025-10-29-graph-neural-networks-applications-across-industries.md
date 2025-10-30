@@ -22,7 +22,50 @@ Key business challenges that GNNs address include:
 - Scaling relationship analysis across millions of connected entities
 - Improving prediction accuracy in scenarios with sparse individual features
 
-![GNN Architecture Performance Comparison]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_1.png)
+
+```mermaid
+graph LR
+    subgraph "Input Layer"
+        A[Node Features]
+        B[Edge Features]
+        C[Graph Structure]
+    end
+    
+    subgraph "GNN Architectures"
+        D[GraphSAGE<br/>Sampling]
+        E[GCN<br/>Spectral]
+        F[GAT<br/>Attention]
+        G[R-GCN<br/>Relational]
+    end
+    
+    subgraph "Applications"
+        H[Social Networks]
+        I[Molecular<br/>Analysis]
+        J[Recommendation<br/>Systems]
+        K[Knowledge<br/>Graphs]
+    end
+    
+    A --> D
+    A --> E
+    A --> F
+    B --> G
+    C --> D
+    C --> E
+    C --> F
+    C --> G
+    
+    D --> H
+    E --> I
+    F --> J
+    G --> K
+    
+    style D fill:#3B82F6,stroke:#2563EB,color:#fff
+    style E fill:#10B981,stroke:#059669,color:#fff
+    style F fill:#F59E0B,stroke:#D97706,color:#000
+    style G fill:#8B5CF6,stroke:#7C3AED,color:#fff
+```
+
+*GNN Architecture Performance Comparison*
 
 *Comparing GraphSAGE, GCN, GAT, and R-GCN architectures across industry applications*
 
@@ -129,7 +172,35 @@ def evaluate_aml_model(model, test_data):
     }
 ```
 
-![E-commerce and Finance GNN Implementation Timeline]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_2.png)
+
+```mermaid
+flowchart TD
+    A[Central Node v] --> B[Collect Messages<br/>from Neighbors]
+    B --> C{Aggregation<br/>Function}
+    C -->|Sum| D[Σ messages]
+    C -->|Mean| E[μ messages]
+    C -->|Max| F[max messages]
+    
+    D --> G[Combine with<br/>Node Features]
+    E --> G
+    F --> G
+    
+    G --> H[Apply<br/>Transformation]
+    H --> I[Non-linear<br/>Activation]
+    I --> J[Updated Node<br/>Embedding h_v]
+    
+    J --> K{Next Layer?}
+    K -->|Yes| B
+    K -->|No| L[Final<br/>Representation]
+    
+    style A fill:#3B82F6,stroke:#2563EB,color:#fff
+    style C fill:#10B981,stroke:#059669,color:#fff
+    style G fill:#F59E0B,stroke:#D97706,color:#000
+    style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
+    style L fill:#EF4444,stroke:#DC2626,color:#fff
+```
+
+*E-commerce and Finance GNN Implementation Timeline*
 
 *Step-by-step implementation timeline comparing GraphSAGE for product recommendations vs GCN for fraud detection*
 
@@ -158,7 +229,41 @@ Industry implementations show consistent improvements over traditional methods:
 
 
 
-![GNN vs Traditional Methods Performance]({{ site.baseurl }}/assets/images/articles/graph-neural-networks-applications-across-industries_viz_3.png)
+
+```mermaid
+graph TB
+    subgraph "E-Commerce"
+        A1[User-Product<br/>Graph]
+        A2[Purchase<br/>Prediction]
+    end
+    
+    subgraph "Finance"
+        B1[Transaction<br/>Network]
+        B2[Fraud<br/>Detection]
+    end
+    
+    subgraph "Healthcare"
+        C1[Molecular<br/>Graphs]
+        C2[Drug<br/>Discovery]
+    end
+    
+    subgraph "Social Media"
+        D1[Social<br/>Network]
+        D2[Influence<br/>Analysis]
+    end
+    
+    A1 --> A2
+    B1 --> B2
+    C1 --> C2
+    D1 --> D2
+    
+    style A2 fill:#3B82F6,stroke:#2563EB,color:#fff
+    style B2 fill:#10B981,stroke:#059669,color:#fff
+    style C2 fill:#F59E0B,stroke:#D97706,color:#000
+    style D2 fill:#8B5CF6,stroke:#7C3AED,color:#fff
+```
+
+*GNN vs Traditional Methods Performance*
 
 *Quantified performance gains: +23% for e-commerce recommendations, +31% for fraud detection, +15% for drug discovery*
 

@@ -19,7 +19,48 @@ Consider an online retail company that uses a recommendation engine to personali
 
 This degradation often occurs gradually—what's known as *model drift*—making it nearly impossible to detect without proactive monitoring systems in place. The challenge lies in building a robust infrastructure that can track model performance in real-time, detect anomalies, and trigger alerts or automated retraining protocols.
 
-![Model Performance Tracking]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_1.png)
+
+```mermaid
+graph TB
+    subgraph "Production Environment"
+        A[Model Serving API]
+        B[Prediction Logs]
+        C[Feature Store]
+    end
+    
+    subgraph "Monitoring System"
+        D[Data Collector]
+        E[Metrics Engine]
+        F[Drift Detector]
+        G[Alert System]
+    end
+    
+    subgraph "Outputs"
+        H[Dashboard]
+        I[Alert Notifications]
+        J[Retraining Trigger]
+    end
+    
+    A -->|Predictions| B
+    A -->|Features| C
+    B --> D
+    C --> D
+    D --> E
+    D --> F
+    E -->|Metrics| H
+    F -->|Drift Score| H
+    E -->|Threshold Breach| G
+    F -->|High Drift| G
+    G --> I
+    G --> J
+    
+    style A fill:#3B82F6,stroke:#2563EB,color:#fff
+    style E fill:#10B981,stroke:#059669,color:#fff
+    style F fill:#F59E0B,stroke:#D97706,color:#fff
+    style G fill:#EF4444,stroke:#DC2626,color:#fff
+    style H fill:#8B5CF6,stroke:#7C3AED,color:#fff
+```
+
 *Real-time model performance metrics and drift detection patterns*
 
 ## Understanding Real-time Model Monitoring
@@ -117,7 +158,29 @@ class ModelMonitor:
         return psi
 ```
 
-![Monitoring Architecture Workflow]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_2.png)
+
+```mermaid
+flowchart LR
+    A[Incoming Data] --> B{Feature<br/>Extraction}
+    B --> C[Calculate<br/>Statistics]
+    C --> D{Compare with<br/>Baseline}
+    D -->|PSI < 0.1| E[No Action<br/>Required]
+    D -->|0.1 ≤ PSI < 0.25| F[Monitor<br/>Closely]
+    D -->|PSI ≥ 0.25| G[Trigger<br/>Alert]
+    
+    G --> H[Investigate<br/>Root Cause]
+    H --> I{Decision}
+    I -->|Retrain| J[Model<br/>Retraining]
+    I -->|Adjust| K[Update<br/>Baseline]
+    I -->|Accept| L[Document<br/>& Continue]
+    
+    style A fill:#3B82F6,stroke:#2563EB,color:#fff
+    style C fill:#10B981,stroke:#059669,color:#fff
+    style D fill:#F59E0B,stroke:#D97706,color:#000
+    style G fill:#EF4444,stroke:#DC2626,color:#fff
+    style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
+```
+
 *End-to-end monitoring pipeline architecture*
 
 ## Model Evaluation and Performance Assessment
@@ -223,7 +286,52 @@ Advanced organizations employ ensemble monitoring strategies that combine multip
 - **Rule-based Systems**: Business logic-based alerts for domain-specific scenarios
 - **Expert Systems**: Integration with domain expert knowledge for contextual interpretation
 
-![Model Drift Detection Metrics]({{ site.baseurl }}/assets/images/articles/real-time-model-monitoring-in-production_viz_3.png)
+
+```mermaid
+graph TD
+    subgraph "Model Performance Metrics"
+        A[Accuracy Tracking]
+        B[Precision/Recall]
+        C[Latency Monitoring]
+    end
+    
+    subgraph "Data Quality Metrics"
+        D[Feature Drift PSI]
+        E[Missing Values %]
+        F[Outlier Detection]
+    end
+    
+    subgraph "Business Metrics"
+        G[Conversion Rate]
+        H[Revenue Impact]
+        I[User Engagement]
+    end
+    
+    subgraph "Action Center"
+        J{Health<br/>Status}
+    end
+    
+    A --> J
+    B --> J
+    C --> J
+    D --> J
+    E --> J
+    F --> J
+    G --> J
+    H --> J
+    I --> J
+    
+    J -->|Healthy| K[Continue<br/>Monitoring]
+    J -->|Warning| L[Investigate]
+    J -->|Critical| M[Immediate<br/>Action]
+    
+    style A fill:#3B82F6,stroke:#2563EB,color:#fff
+    style D fill:#10B981,stroke:#059669,color:#fff
+    style G fill:#F59E0B,stroke:#D97706,color:#000
+    style J fill:#8B5CF6,stroke:#7C3AED,color:#fff
+    style M fill:#EF4444,stroke:#DC2626,color:#fff
+```
+
 *Trend analysis showing drift detection and performance correlation*
 
 ## Conclusion and Actionable Insights
